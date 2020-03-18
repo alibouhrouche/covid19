@@ -7,7 +7,16 @@ var Data = [];
 var allData = {};
 var allCountries = [];
 var count = 0;
+function fixcountry(country){
+  switch (country){
+    case 'S. Korea':
+      return 'Korea (Republic of)';
+    default:
+      return country;
+  }
+}
 function getalpha2Code(country){
+  country = fixcountry(country);
   for (let i = 0; i < allCountries.length; i++) {
     const element = allCountries[i];
     if((element.name == country)){
@@ -16,19 +25,6 @@ function getalpha2Code(country){
       for (let i = 0; i < element.altSpellings.length; i++) {
         const e1 = element.altSpellings[i];
         if(e1 == country){
-          return element.alpha2Code;
-        }
-      }
-    }
-  }
-  for (let i = 0; i < allCountries.length; i++) {
-    const element = allCountries[i];
-    if((element.name.indexOf(country)>0)){
-      return element.alpha2Code;
-    }else{
-      for (let i = 0; i < element.altSpellings.length; i++) {
-        const e1 = element.altSpellings[i];
-        if((e1.indexOf(country)>0)){
           return element.alpha2Code;
         }
       }
