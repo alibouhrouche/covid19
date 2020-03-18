@@ -5,6 +5,35 @@ var flag = document.getElementById('flag');
 var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 var Data = [];
 var allData = {};
+var allCountries = [];
+var count = 0;
+function getalpha2Code(country){
+  for (let i = 0; i < allCountries.length; i++) {
+    const element = array[i];
+    
+  }
+}
+function getallcountries(next){
+  fetch("https://coronavirus-19-api.herokuapp.com/countries")
+  .then(
+      function(response) {
+      if (response.status !== 200) {
+
+          return;
+      }
+      // Examine the text in the response
+      response.json().then(function(data) {
+          allCountries = data;
+          if(typeof(next) == "function"){
+            next();
+          }
+      });
+      }
+  )
+  .catch(function(err) {
+      
+  });
+}
 function getData(next){
   fetch("https://coronavirus-19-api.herokuapp.com/countries")
   .then(
