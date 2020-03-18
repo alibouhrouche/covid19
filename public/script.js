@@ -1,4 +1,5 @@
 var countries = [
+    "All",
     "China",
     "Italy",
     "Iran",
@@ -168,6 +169,7 @@ var countries = [
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var flag = document.getElementById('flag');
+var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -267,7 +269,7 @@ function autocomplete(inp, arr) {
   }
 autocomplete(sel, countries);
 flag.addEventListener("error", function(){
-  flag.src = "";
+  flag.src = errimg;
 });
 flag.addEventListener("click", function(){
   hashChange();
@@ -277,7 +279,7 @@ function setflag(country){
   .then(
     function(response) {
       if (response.status !== 200) {
-        flag.src = "";
+        flag.src = errimg;
         return;
       }
       // Examine the text in the response
@@ -285,13 +287,13 @@ function setflag(country){
         if((data[0])&&(data[0]["alpha2Code"])){
           flag.src = "https://www.countryflags.io/" + data[0]["alpha2Code"] + "/shiny/64.png";
         }else{
-          flag.src = "";
+          flag.src = errimg;
         }
       });
     }
   )
   .catch(function(err) {
-    flag.src = "";
+    flag.src = errimg;
   });
 }
 function err(){
@@ -302,6 +304,7 @@ function err(){
     document.getElementById('todayDeaths').innerText = "❓";
     document.getElementById('recovered').innerText = "❓";
     document.getElementById('critical').innerText = "❓";
+    flag.src = errimg;
 }
 function all(){
 fetch("https://corona.lmao.ninja/all")
@@ -330,8 +333,10 @@ fetch("https://corona.lmao.ninja/all")
 }
 function hashChange(){
 var country = location.hash.slice(1);
-if(country){
-    flag.src = "";
+  if(country == "All"){
+    all();
+  }else if(country){
+    flag.src = errimg;
     fetch(`https://corona.lmao.ninja/countries/${country}`)
     .then(
         function(response) {

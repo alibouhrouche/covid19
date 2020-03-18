@@ -98,6 +98,8 @@ body {
 
 img {
   vertical-align: middle;
+  height: 64px;
+  width: 64px;
 }
 
 #country {
