@@ -177,7 +177,6 @@ footer {
   padding: 10px;
   cursor: pointer;
   background-color: #324759;
-  border-bottom: 1px solid #d4d4d4;
 }
 .autocomplete-items div:hover {
   /*when hovering an item:*/
