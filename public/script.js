@@ -9,10 +9,9 @@ var allData = {
   "cases": 0,
   "todayCases": 0,
   "deaths": 0,
-  "todayDeaths": 11,
-  "recovered": 69614,
-  "active": 8043,
-  "critical": 2622
+  "todayDeaths": 0,
+  "recovered": 0,
+  "critical": 0
 };
 var allCountries = [];
 var count = 0;
@@ -67,7 +66,7 @@ function getData(next){
   .then(
       function(response) {
       if (response.status !== 200) {
-          all();
+          err();
           return;
       }
       // Examine the text in the response
@@ -77,12 +76,14 @@ function getData(next){
           for(var c in Data){
             countries.push(Data[c]["country"]);
           }
-          allData['todayCases'] = 0;
-          allData['todayDeaths'] = 0;
           for (let i = 0; i < Data.length; i++) {
             const e = Data[i];
+            allData['cases'] += e['cases'];
             allData['todayCases'] += e['todayCases'];
+            allData['deaths'] += e['deaths'];
             allData['todayDeaths'] += e['todayDeaths'];
+            allData['recovered'] += e['recovered'];
+            allData['critical'] += e['critical'];
           }
           autocomplete(sel, countries);
           getallcountries(next?next:NULL);
@@ -90,7 +91,7 @@ function getData(next){
       }
   )
   .catch(function(err) {
-      all();
+      err();
   });
 }
 function autocomplete(inp, arr) {
@@ -215,34 +216,15 @@ function err(){
     document.getElementById('critical').innerText = "❓";
     flag.src = errimg;
 }
-function getall(next){
-  fetch("https://coronavirus-19-api.herokuapp.com/all")
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        err();
-        return;
-      }
-      // Examine the text in the response
-      response.json().then(function(data) {
-        allData = data;
-        getData(next?next:NULL);
-      });
-    }
-  )
-  .catch(function(err) {
-    err();
-  });
-}
 function all(){
     flag.src = errimg;
     sel.value = "All";
     document.getElementById('cases').innerText = allData['cases'];
-    document.getElementById('todayCases').innerText = "❓";
+    document.getElementById('todayCases').innerText = allData['todayCases'];
     document.getElementById('deaths').innerText = allData['deaths'];
     document.getElementById('todayDeaths').innerText = allData['todayDeaths'];
     document.getElementById('recovered').innerText = allData['recovered'];
-    document.getElementById('critical').innerText = "❓";
+    document.getElementById('critical').innerText = allData['critical'];
   }
 function hashChange(){
   var country = decodeURI(location.hash.slice(1));
@@ -267,4 +249,4 @@ window.addEventListener('hashchange', function (e) {
     e.preventDefault();
     hashChange();
 });
-getall(hashChange);
+getData(hashChange);
