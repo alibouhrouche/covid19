@@ -21,6 +21,19 @@ function getalpha2Code(country){
       }
     }
   }
+  for (let i = 0; i < allCountries.length; i++) {
+    const element = allCountries[i];
+    if((element.name.indexOf(country)>0)){
+      return element.alpha2Code;
+    }else{
+      for (let i = 0; i < element.altSpellings.length; i++) {
+        const e1 = element.altSpellings[i];
+        if((e1.indexOf(country)>0)){
+          return element.alpha2Code;
+        }
+      }
+    }
+  }
   return false;
 }
 function getallcountries(next){
