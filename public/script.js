@@ -1,4 +1,5 @@
 var countries = [];
+
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var flag = document.getElementById('flag');
@@ -168,7 +169,7 @@ function err(){
     flag.src = errimg;
 }
 function getall(next){
-fetch("https://coronavirus-19-api.herokuapp.com/all")
+  fetch("https://coronavirus-19-api.herokuapp.com/all")
   .then(
     function(response) {
       if (response.status !== 200) {
@@ -197,8 +198,8 @@ function all(){
     document.getElementById('critical').innerText = "❓";
   }
 function hashChange(){
-var country = location.hash.slice(1);
-  if(country == "All"){
+  var country = location.hash.slice(1);
+  if((country == "All")||(country == "")){
     all();
   }else if((country)&&(countries.indexOf(country))>0){
     flag.src = errimg;
@@ -212,7 +213,7 @@ var country = location.hash.slice(1);
     document.getElementById('recovered').innerText = data['recovered'];
     document.getElementById('critical').innerText = data['critical'];
     }else{
-        all();
+        err();
     }
 }
 window.addEventListener('hashchange', function (e) {
