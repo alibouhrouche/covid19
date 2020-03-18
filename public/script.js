@@ -4,7 +4,16 @@ var list = document.getElementById('country-list');
 var flag = document.getElementById('flag');
 var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 var Data = [];
-var allData = {};
+var allData = {
+  "country": "All",
+  "cases": 0,
+  "todayCases": 0,
+  "deaths": 0,
+  "todayDeaths": 11,
+  "recovered": 69614,
+  "active": 8043,
+  "critical": 2622
+};
 var allCountries = [];
 var count = 0;
 function fixcountry(country){
@@ -67,6 +76,13 @@ function getData(next){
           countries = ["All"];
           for(var c in Data){
             countries.push(Data[c]["country"]);
+          }
+          allData['todayCases'] = 0;
+          allData['todayDeaths'] = 0;
+          for (let i = 0; i < Data.length; i++) {
+            const e = Data[i];
+            allData['todayCases'] += e['todayCases'];
+            allData['todayDeaths'] += e['todayDeaths'];
           }
           autocomplete(sel, countries);
           getallcountries(next?next:NULL);
@@ -224,7 +240,7 @@ function all(){
     document.getElementById('cases').innerText = allData['cases'];
     document.getElementById('todayCases').innerText = "❓";
     document.getElementById('deaths').innerText = allData['deaths'];
-    document.getElementById('todayDeaths').innerText = "❓";
+    document.getElementById('todayDeaths').innerText = allData['todayDeaths'];
     document.getElementById('recovered').innerText = allData['recovered'];
     document.getElementById('critical').innerText = "❓";
   }
