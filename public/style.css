@@ -163,6 +163,7 @@ footer {
     display: flex;
     justify-content: flex-end;
     padding-right: 20px;
+    padding-bottom: 10px;
 }
 #footer_heart{
     color:#ff0000;
