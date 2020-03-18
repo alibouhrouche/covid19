@@ -270,7 +270,7 @@ flag.addEventListener("error", function(){
   flag.src = "";
 });
 function setflag(country){
-  fetch(`https://restcountries.eu/rest/v2/name/${country}?fields=alpha2Code`)
+  fetch(`https://restcountries.eu/rest/v2/natcountry}?fields=alpha2Code`)
   .then(
     function(response) {
       if (response.status !== 200) {
