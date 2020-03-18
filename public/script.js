@@ -200,7 +200,7 @@ function autocomplete(inp, arr) {
                 b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
                 inp.value = this.getElementsByTagName("input")[0].value;
-                location.hash = "#/" + sel.value;
+                location.hash = "#" + sel.value;
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
@@ -269,8 +269,11 @@ autocomplete(sel, countries);
 flag.addEventListener("error", function(){
   flag.src = "";
 });
+flag.addEventListener("click", function(){
+  hashChange();
+});
 function setflag(country){
-  fetch(`https://restcountries.eu/rest/v2/name/${country}?fields=alpha2Code`)
+  fetch(`https://restcountries.eu/rest/v2/name/${encodeURIComponent(country)}?fields=alpha2Code`)
   .then(
     function(response) {
       if (response.status !== 200) {
@@ -280,7 +283,7 @@ function setflag(country){
       // Examine the text in the response
       response.json().then(function(data) {
         if((data[0])&&(data[0]["alpha2Code"])){
-          flag.src = "https://www.countryflags.io/" + data[0]["alpha2Code"] + "/flat/64.png";
+          flag.src = "https://www.countryflags.io/" + data[0]["alpha2Code"] + "/shiny/64.png";
         }else{
           flag.src = "";
         }
@@ -326,7 +329,7 @@ fetch("https://corona.lmao.ninja/all")
   });
 }
 function hashChange(){
-var country = location.hash.slice(2);
+var country = location.hash.slice(1);
 if(country){
     flag.src = "";
     fetch(`https://corona.lmao.ninja/countries/${country}`)
