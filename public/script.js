@@ -5,7 +5,7 @@ var flag = document.getElementById('flag');
 var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 var Data = [];
 function getData(next){
-  fetch("https://corona.lmao.ninja/countries")
+  fetch("https://coronavirus-19-api.herokuapp.com/countries")
   .then(
       function(response) {
       if (response.status !== 200) {
@@ -20,7 +20,9 @@ function getData(next){
             countries.push(Data[c]["country"]);
           }
           autocomplete(sel, countries);
-          
+          if(typeof(next) == "function"){
+            next();
+          }
       });
       }
   )
@@ -130,7 +132,7 @@ flag.addEventListener("error", function(){
   flag.src = errimg;
 });
 flag.addEventListener("click", function(){
-  getData();
+  getData(hashChange);
 });
 function setflag(country){
   fetch(`https://restcountries.eu/rest/v2/name/${encodeURIComponent(country)}?fields=alpha2Code`)
@@ -165,7 +167,7 @@ function err(){
     flag.src = errimg;
 }
 function all(){
-fetch("https://corona.lmao.ninja/all")
+fetch("https://coronavirus-19-api.herokuapp.com/all")
   .then(
     function(response) {
       if (response.status !== 200) {
@@ -195,7 +197,7 @@ var country = location.hash.slice(1);
     all();
   }else if((country)&&(countries.indexOf(country))>0){
     flag.src = errimg;
-    data = Data[countries.indexOf(country)];
+    data = Data[countries.indexOf(country)-1];
     setflag(data['country']);
     sel.value = data['country'];
     document.getElementById('cases').innerText = data['cases'];
@@ -212,4 +214,4 @@ window.addEventListener('hashchange', function (e) {
     e.preventDefault();
     hashChange();
 });
-hashChange();
+getData(hashChange);
