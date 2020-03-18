@@ -181,7 +181,7 @@ footer {
 }
 .autocomplete-items div:hover {
   /*when hovering an item:*/
-  background-color: #0672d1;
+  background-color: #003e74;
 }
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
