@@ -4,6 +4,7 @@ var list = document.getElementById('country-list');
 var flag = document.getElementById('flag');
 var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
 var Data = [];
+var allData = {};
 function getData(next){
   fetch("https://coronavirus-19-api.herokuapp.com/countries")
   .then(
@@ -132,7 +133,7 @@ flag.addEventListener("error", function(){
   flag.src = errimg;
 });
 flag.addEventListener("click", function(){
-  getData(hashChange);
+  getall(hashChange);
 });
 function setflag(country){
   fetch(`https://restcountries.eu/rest/v2/name/${encodeURIComponent(country)}?fields=alpha2Code`)
@@ -166,7 +167,7 @@ function err(){
     document.getElementById('critical').innerText = "❓";
     flag.src = errimg;
 }
-function all(){
+function getall(next){
 fetch("https://coronavirus-19-api.herokuapp.com/all")
   .then(
     function(response) {
@@ -176,14 +177,8 @@ fetch("https://coronavirus-19-api.herokuapp.com/all")
       }
       // Examine the text in the response
       response.json().then(function(data) {
-        flag.src = "";
-        sel.value = "All";
-        document.getElementById('cases').innerText = data['cases'];
-        document.getElementById('todayCases').innerText = "❓";
-        document.getElementById('deaths').innerText = data['deaths'];
-        document.getElementById('todayDeaths').innerText = "❓";
-        document.getElementById('recovered').innerText = data['recovered'];
-        document.getElementById('critical').innerText = "❓";
+        allData = data;
+        getData(next?next:NULL);
       });
     }
   )
@@ -191,6 +186,16 @@ fetch("https://coronavirus-19-api.herokuapp.com/all")
     err();
   });
 }
+function all(){
+    flag.src = errimg;
+    sel.value = "All";
+    document.getElementById('cases').innerText = allData['cases'];
+    document.getElementById('todayCases').innerText = "❓";
+    document.getElementById('deaths').innerText = allData['deaths'];
+    document.getElementById('todayDeaths').innerText = "❓";
+    document.getElementById('recovered').innerText = allData['recovered'];
+    document.getElementById('critical').innerText = "❓";
+  }
 function hashChange(){
 var country = location.hash.slice(1);
   if(country == "All"){
@@ -214,4 +219,4 @@ window.addEventListener('hashchange', function (e) {
     e.preventDefault();
     hashChange();
 });
-getData(hashChange);
+getall(hashChange);
