@@ -1,5 +1,4 @@
 var countries = [];
-
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var flag = document.getElementById('flag');
