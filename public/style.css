@@ -110,6 +110,15 @@ img {
   width: 80vw;
 }
 
+a {
+  text-decoration: none;
+  color: #41adff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 input:not([type='checkbox']):not([type='radio']),
 select {
   display: block;
@@ -129,8 +138,6 @@ input, select, button, textarea {
   border-radius: 6px;
   outline: none;
 }
-
-
 
 input:not([type='checkbox']):not([type='radio']),
 select, button, textarea {

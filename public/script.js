@@ -170,6 +170,7 @@ var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var flag = document.getElementById('flag');
 var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+var Data = [];
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
