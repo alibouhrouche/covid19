@@ -35,11 +35,16 @@
   </head>
   <body>
     <h1>
-      <label for="country-sel">Choose a Country: <img src="https://www.countryflags.io/MA/flat/64.png"></label>
-      <input id="country" list="country-list">
+      <form autocomplete="off" action="/action_page.php">
+      <label for="country-sel">Choose a Country: <img id="flag" src="https://www.countryflags.io/MA/flat/64.png"></label>
+      <br>
+      <div class="autocomplete">
+        <input id="country" placeholder="Country">
+      </div>
       <datalist id="country-list">
         <option value="All">All</option>
       </datalist>
+      </form>
     </h1>
     <div class="row">
       <div class="column">
