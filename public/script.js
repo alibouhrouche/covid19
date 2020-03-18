@@ -9,12 +9,22 @@ var allCountries = [];
 var count = 0;
 function getalpha2Code(country){
   for (let i = 0; i < allCountries.length; i++) {
-    const element = array[i];
-    
+    const element = allCountries[i];
+    if((element.name == country)){
+      return element.alpha2Code;
+    }else{
+      for (let i = 0; i < element.altSpellings.length; i++) {
+        const e1 = element.altSpellings[i];
+        if(e1 == country){
+          return element.alpha2Code;
+        }
+      }
+    }
   }
+  return false;
 }
 function getallcountries(next){
-  fetch("https://coronavirus-19-api.herokuapp.com/countries")
+  fetch("https://restcountries.eu/rest/v2/all?fields=name;altSpellings;alpha2Code")
   .then(
       function(response) {
       if (response.status !== 200) {
@@ -50,9 +60,7 @@ function getData(next){
             countries.push(Data[c]["country"]);
           }
           autocomplete(sel, countries);
-          if(typeof(next) == "function"){
-            next();
-          }
+          getallcountries(next?next:NULL);
       });
       }
   )
@@ -165,26 +173,12 @@ flag.addEventListener("click", function(){
   getall(hashChange);
 });
 function setflag(country){
-  fetch(`https://restcountries.eu/rest/v2/name/${encodeURIComponent(country)}?fields=alpha2Code`)
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        flag.src = errimg;
-        return;
-      }
-      // Examine the text in the response
-      response.json().then(function(data) {
-        if((data[0])&&(data[0]["alpha2Code"])){
-          flag.src = "https://www.countryflags.io/" + data[0]["alpha2Code"] + "/shiny/64.png";
-        }else{
-          flag.src = errimg;
-        }
-      });
+    var alpha2Code = getalpha2Code(country);
+    if(alpha2Code){
+      flag.src = "https://www.countryflags.io/" + alpha2Code + "/shiny/64.png";
+    }else{
+      flag.src = errimg;
     }
-  )
-  .catch(function(err) {
-    flag.src = errimg;
-  });
 }
 function err(){
     document.getElementById('country').innerText = "❓";
@@ -226,7 +220,7 @@ function all(){
     document.getElementById('critical').innerText = "❓";
   }
 function hashChange(){
-  var country = location.hash.slice(1);
+  var country = decodeURI(location.hash.slice(1));
   if((country == "All")||(country == "")){
     all();
   }else if((country)&&(countries.indexOf(country))>0){
