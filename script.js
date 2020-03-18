@@ -165,7 +165,7 @@ var countries = [
     "Tanzania",
     "Togo"
 ];
-var sel = document.getElementById('country-sel');
+var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 for(var c in countries){
     var e = document.createElement('option');
@@ -189,10 +189,9 @@ fetch("https://corona.lmao.ninja/all")
         err();
         return;
       }
-      sel.value = "All";
       // Examine the text in the response
       response.json().then(function(data) {
-        document.getElementById('country').innerText = "All :";
+        sel.value = "All";
         document.getElementById('cases').innerText = data['cases'];
         document.getElementById('todayCases').innerText = "❓";
         document.getElementById('deaths').innerText = data['deaths'];
@@ -209,7 +208,6 @@ fetch("https://corona.lmao.ninja/all")
 function hashChange(){
 var country = location.hash.slice(2);
 if(country){
-    sel.value = country;
     fetch(`https://corona.lmao.ninja/countries/${country}`)
     .then(
         function(response) {
@@ -220,7 +218,7 @@ if(country){
 
         // Examine the text in the response
         response.json().then(function(data) {
-            document.getElementById('country').innerText = data['country'] + ":";
+            sel.value = data['country'];
             document.getElementById('cases').innerText = data['cases'];
             document.getElementById('todayCases').innerText = data['todayCases'];
             document.getElementById('deaths').innerText = data['deaths'];

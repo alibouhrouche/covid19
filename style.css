@@ -96,7 +96,11 @@ body {
   background: #415c73;
 }
 
-#country-sel {
+img {
+  vertical-align: middle;
+}
+
+#country {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
