@@ -17,15 +17,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-a {
-  text-decoration: none;
-  color: #41adff;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 /* Float four columns side by side */
 .column {
   float: left;
@@ -163,7 +154,6 @@ footer {
     display: flex;
     justify-content: flex-end;
     padding-right: 20px;
-    padding-bottom: 10px;
 }
 #footer_heart{
     color:#ff0000;

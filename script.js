@@ -167,7 +167,7 @@ var countries = [
 ];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
-var flag = document.getElementById('flag');
+var flag = document.get
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -266,29 +266,22 @@ function autocomplete(inp, arr) {
   });
   }
 autocomplete(sel, countries);
-flag.addEventListener("error", function(){
-  flag.src = "";
-});
 function setflag(country){
-  fetch(`https://restcountries.eu/rest/v2/natcountry}?fields=alpha2Code`)
+  fetch(`http://restcountries.eu/rest/v2/name/${country}?fields=alpha2Code`)
   .then(
     function(response) {
       if (response.status !== 200) {
-        flag.src = "";
+        err();
         return;
       }
       // Examine the text in the response
       response.json().then(function(data) {
-        if((data[0])&&(data[0]["alpha2Code"])){
-          flag.src = "https://www.countryflags.io/" + data[0]["alpha2Code"] + "/flat/64.png";
-        }else{
-          flag.src = "";
-        }
+        data[0]["alpha2Code"]
       });
     }
   )
   .catch(function(err) {
-    flag.src = "";
+    err();
   });
 }
 function err(){
@@ -310,7 +303,6 @@ fetch("https://corona.lmao.ninja/all")
       }
       // Examine the text in the response
       response.json().then(function(data) {
-        flag.src = "";
         sel.value = "All";
         document.getElementById('cases').innerText = data['cases'];
         document.getElementById('todayCases').innerText = "❓";
@@ -328,7 +320,6 @@ fetch("https://corona.lmao.ninja/all")
 function hashChange(){
 var country = location.hash.slice(2);
 if(country){
-    flag.src = "";
     fetch(`https://corona.lmao.ninja/countries/${country}`)
     .then(
         function(response) {
@@ -339,7 +330,6 @@ if(country){
 
         // Examine the text in the response
         response.json().then(function(data) {
-            setflag(data['country']);
             sel.value = data['country'];
             document.getElementById('cases').innerText = data['cases'];
             document.getElementById('todayCases').innerText = data['todayCases'];
@@ -362,3 +352,11 @@ window.addEventListener('hashchange', function (e) {
     hashChange();
 });
 hashChange();
+
+sel.addEventListener("change",()=>{
+    if(sel.value == "All"){
+        location.hash = "";
+    }else{
+        location.hash = "#/" + sel.value;
+    }
+});
