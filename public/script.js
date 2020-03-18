@@ -196,7 +196,7 @@ flag.addEventListener("error", function(){
   flag.src = errimg;
 });
 flag.addEventListener("click", function(){
-  getall(hashChange);
+  getData(hashChange);
 });
 function setflag(country){
     var alpha2Code = getalpha2Code(country);
