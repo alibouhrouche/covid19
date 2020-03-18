@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hello!</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
-    
-    <!-- import the webpage's javascript file -->
-    <script src="/script.js" defer></script>
-  </head>  
-  <body>
-    <h1>Hi there!</h1>
-    
-    <p>
-      I'm your cool new webpage. Made with <a href="https://glitch.com">Glitch</a>!
-    </p>
+    <meta charset="utf-8" />
+    <title>Welcome to Glitch!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A cool thing made with Glitch" />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/edit/favicon-app.ico"
+      type="image/x-icon"
+    />
 
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js"></script>
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+  </head>
+  <body>
+    <h1 id="country">❓</h1>
+    <h3>
+      <label for="country-sel">Choose a Country:</label>
+      <input id="country-sel" list="country-list">
+      <datalist id="country-list">
+        <option value="All">All</option>
+      </datalist>
+    </h3>
+    <div class="row">
+      <div class="column">
+        <div class="card" id="cases-div">
+          <h1>🤒 Cases: <span id="cases">❓</span></h1>
+          <h3>📅 Today : <span id="todayCases">❓</span></h3>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card" id="deaths-div">
+          <h1>💀 Deaths : <span id="deaths">❓</span></h1>
+          <h3>📅 Today : <span id="todayDeaths">❓</span></h3>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card" id="recovred-div">
+          <h1>😄 Recovered: <span id="recovered">❓</span></h1>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card" id="critical-div">
+          <h1>🤢 Critical: <span id="critical">❓</span></h1>
+        </div>
+      </div>
+    </div>
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/script.js" defer></script>
   </body>
 </html>
