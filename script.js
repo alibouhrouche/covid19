@@ -167,6 +167,7 @@ var countries = [
 ];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
+var flag = document.get
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -275,7 +276,7 @@ function setflag(country){
       }
       // Examine the text in the response
       response.json().then(function(data) {
-        
+        data[0]["alpha2Code"]
       });
     }
   )
