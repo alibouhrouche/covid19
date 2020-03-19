@@ -221,3 +221,8 @@
     display: inline;
     width: 3em;
   }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: initial; 
+  margin: 0; 
+}
