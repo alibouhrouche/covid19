@@ -43,7 +43,7 @@ app.get("/data",async (request, response, next) => {
   var ResData = [
     {
       "country": "All",
-      "order": 0,
+      "code": false,
       "cases": 0,
       "todayCases": 0,
       "deaths": 0,
@@ -60,8 +60,10 @@ app.get("/data",async (request, response, next) => {
     ResData[0]['todayDeaths'] += e['todayDeaths'];
     ResData[0]['recovered'] += e['recovered'];
     ResData[0]['critical'] += e['critical'];
+    var code = countries.find(e => e.name == e['country']).code;
     ResData.push({
       "country": e['country'],
+      "code": code,
       "cases": e['cases'],
       "todayCases": e['todayCases'],
       "deaths": e['deaths'],
