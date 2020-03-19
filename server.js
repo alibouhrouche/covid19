@@ -27,6 +27,7 @@ app.get("/data",async (request, response, next) => {
   var ResData = [
     {
       "country": "All",
+      "order": 0,
       "cases": 0,
       "todayCases": 0,
       "deaths": 0,
@@ -45,7 +46,7 @@ app.get("/data",async (request, response, next) => {
     ResData[0]['critical'] += e['critical'];
     ResData.push({
       "country": e['country'],
-      "country": e['country'],
+      "order": i+1,
       "cases": e['cases'],
       "todayCases": e['todayCases'],
       "deaths": e['deaths'],
