@@ -76,6 +76,15 @@ function getData(next){
           for(var c in Data){
             countries.push(Data[c]["country"]);
           }
+          allData = {
+            country: "All",
+            cases:0,
+            todayCases:0,
+            deaths:0,
+            todayDeaths:0,
+            recovered:0,
+            critical:0
+          };
           for (let i = 0; i < Data.length; i++) {
             const e = Data[i];
             allData['cases'] += e['cases'];
