@@ -66,6 +66,8 @@ body {
 }
 
 .card {
+  display: flex;
+  f
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
@@ -142,6 +144,11 @@ input, select, button, textarea {
 input:not([type='checkbox']):not([type='radio']),
 select, button, textarea {
   -webkit-appearance: none;
+}
+
+.card-h1 {
+  display: flex;
+  align-self: center;
 }
 
 .svg-icon {
