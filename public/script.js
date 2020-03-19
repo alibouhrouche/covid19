@@ -10,7 +10,8 @@ var out = {
   todayDeaths : document.getElementById('todayDeaths'),
   recovered : document.getElementById('recovered'),
   critical : document.getElementById('critical'),
-  flag : document.getElementById('flag')
+  flag : document.getElementById('flag'),
+  order : document.getElementById('order')
 };
 function getData(next){
   fetch("/data")
@@ -149,12 +150,13 @@ function err(){
   out.critical.innerText = '?';
   out.flag.className = "fflag ff-xl ff-wave fflag-none";
   out.flag.title = "none";
+  out.order.innerText = "0";
 }
 function hashChange(){
   var country = decodeURI(location.hash.slice(1));
   country = (country == "") ? "All" : country;
-  console.log(country);
-  if((country)&&(countries.indexOf(country))>=0){
+  var i =countries.indexOf(country);
+  if((country)&&(i>=0)){
     var data = Data[countries.indexOf(country)];
     sel.value = data['country'];
     out.cases.innerText = data['cases'];
@@ -165,6 +167,7 @@ function hashChange(){
     out.critical.innerText = data['critical'];
     out.flag.className = "fflag ff-xl ff-wave fflag-" + (data['code'] ? data['code']:'none');
     out.flag.title = data['code'] ? data['code']:'none';
+    out.order.innerText = i;
     }else{
         err();
     }
