@@ -25,7 +25,7 @@ function getData(next){
       response.json().then(function(data) {
           Data = data;
           countries = data.map(({ country }) => country);
-          document.getElementById('all').innerText = data.length-1;
+          out.order.max = document.getElementById('all').innerText = data.length-1;
           autocomplete(sel, countries);
           if(typeof(next) == "function"){
             next();
@@ -134,11 +134,7 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
   }
-
-flag.addEventListener("error", function(){
-  flag.src = errimg;
-});
-flag.addEventListener("click", function(){
+out.flag.addEventListener("click", function(){
   getData(hashChange);
 });
 function err(){
