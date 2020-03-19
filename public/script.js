@@ -174,8 +174,10 @@ function hashChange(){
     }
 }
 out.order.addEventListener('change', function (e){
-  if (!numberInput.validity.valueMissing) {
-    location.hash = "#" + ;
+  if (!out.order.validity.valueMissing) {
+    var a = Data[out.order.value];
+    if((a)&&(a['country']))
+    location.hash = "#" + a['country'];
   }
 });
 window.addEventListener('hashchange', function (e) {
