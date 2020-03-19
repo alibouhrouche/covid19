@@ -60,10 +60,10 @@ app.get("/data",async (request, response, next) => {
     ResData[0]['todayDeaths'] += e['todayDeaths'];
     ResData[0]['recovered'] += e['recovered'];
     ResData[0]['critical'] += e['critical'];
-    var code = countries.find(e => e.name == e['country']).code;
+    var cntry = countries.find(({ name }) => name === e.country);
     ResData.push({
       "country": e['country'],
-      "code": code,
+      "code": cntry ? cntry.code : false,
       "cases": e['cases'],
       "todayCases": e['todayCases'],
       "deaths": e['deaths'],
