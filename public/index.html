@@ -8,7 +8,14 @@
     <title>Track Corona Virus Spread in The World</title>
     <meta name="title" content="Track Corona Virus Spread in The World">
     <meta name="description" content="A Simple App To Track Corona Virus.">
-
+    <link rel="preconnect" href="https://coronavirus-19-api.herokuapp.com">
+    <link rel="preconnect" href="https://cdn.glitch.com">
+    <link rel="preconnect" href="https://restcountries.eu">
+    <link rel="preconnect" href="https://www.countryflags.io">
+    <link rel="dns-prefetch" href="https://coronavirus-19-api.herokuapp.com">
+    <link rel="dns-prefetch" href="https://cdn.glitch.com">
+    <link rel="dns-prefetch" href="https://restcountries.eu">
+    <link rel="dns-prefetch" href="https://www.countryflags.io">
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sarscov2.glitch.me/">
@@ -35,8 +42,8 @@
   </head>
   <body>
     <h1>
-      <form autocomplete="off" action="/action_page.php">
-      <label for="country-sel">Choose a Country: <img id="flag" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></label>
+      <form autocomplete="off">
+      <label for="country">Choose a Country: <img id="flag" src="https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2F2049.png?v=1584630421657"></label>
       <br>
       <div class="autocomplete">
         <input id="country" placeholder="Country">
@@ -49,32 +56,63 @@
     <div class="row">
       <div class="column">
         <div class="card" id="cases-div">
-          <h1 class="card-h1">            <div class="icon baseline">
-              <svg id="footer_heart" width="36" height="36">
-                  <use xlink:href="/icons.svg#1f912"></use>
+          <h1 class="card-h1">            
+            <div class="icon baseline">
+              <svg width="36" height="36">
+                  <use xlink:href="icons.svg#1f912"></use>
               </svg>
             </div>
-            &nbsp;Cases:&nbsp;<span id="cases">❓</span></h1>
-          <h3>📅 Today : <span id="todayCases">❓</span></h3>
+            &nbsp;Cases:&nbsp;<span class="n" id="cases">?</span></h1>
+          <h2 class="card-h2">
+            <div class="icon baseline">
+              <svg width="30" height="30">
+                  <use xlink:href="icons.svg#1f4c5"></use>
+              </svg>
+            </div>  
+          &nbsp;Today:&nbsp;<span class="n" id="todayCases">?</span></h2>
         </div>
       </div>
 
       <div class="column">
         <div class="card" id="deaths-div">
-          <h1>💀 Deaths : <span id="deaths">❓</span></h1>
-          <h3>📅 Today : <span id="todayDeaths">❓</span></h3>
+          <h1 class="card-h1">            
+            <div class="icon baseline">
+            <svg width="36" height="36">
+                <use xlink:href="icons.svg#1f480"></use>
+            </svg>
+          </div>
+          &nbsp;Deaths:&nbsp;<span class="n" id="deaths">?</span></h1>
+          <h2 class="card-h2">
+            <div class="icon baseline">
+              <svg id="footer_heart" width="30" height="30">
+                  <use xlink:href="icons.svg#1f4c5"></use>
+              </svg>
+            </div>  
+          &nbsp;Today:&nbsp;<span class="n" id="todayDeaths">?</span></h2>
         </div>
       </div>
 
       <div class="column">
         <div class="card" id="recovred-div">
-          <h1>😄 Recovered: <span id="recovered">❓</span></h1>
+          <h1 class="card-h1">            
+            <div class="icon baseline">
+            <svg width="36" height="36">
+                <use xlink:href="icons.svg#1f604"></use>
+            </svg>
+          </div>
+          &nbsp;Recovered:&nbsp;<span class="n" id="recovered">?</span></h1>
         </div>
       </div>
 
       <div class="column">
         <div class="card" id="critical-div">
-          <h1>🤢 Critical: <span id="critical">❓</span></h1>
+          <h1 class="card-h1">            
+            <div class="icon baseline">
+            <svg width="36" height="36">
+                <use xlink:href="icons.svg#1f922"></use>
+            </svg>
+          </div>
+          &nbsp;Critical:&nbsp;<span class="n" id="critical">?</span></h1>
         </div>
       </div>
     </div>
@@ -82,7 +120,7 @@
       <div class="footer">Made With&nbsp;
         <div class="icon baseline">
           <svg id="footer_heart" width="16" height="16">
-              <use xlink:href="/icons.svg#fill-heart"></use>
+              <use xlink:href="icons.svg#fill-heart"></use>
           </svg>
         </div>
         &nbsp;By&nbsp;<a href="https://ali.js.org/">Ali Bouhrouche</a></div>

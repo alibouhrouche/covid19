@@ -2,7 +2,9 @@ var countries = [];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var flag = document.getElementById('flag');
-var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+//var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+var errimg = "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2F2049.png?v=1584630421657";
+var allimg = "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2F1f310.png?v=1584630413161";
 var Data = [];
 var allData = {
   "country": "All",
@@ -216,17 +218,17 @@ function setflag(country){
     }
 }
 function err(){
-    document.getElementById('country').innerText = "❓";
-    document.getElementById('cases').innerText = "❓";
-    document.getElementById('todayCases').innerText = "❓";
-    document.getElementById('deaths').innerText = "❓";
-    document.getElementById('todayDeaths').innerText = "❓";
-    document.getElementById('recovered').innerText = "❓";
-    document.getElementById('critical').innerText = "❓";
+    document.getElementById('country').innerText = "?";
+    document.getElementById('cases').innerText = "?";
+    document.getElementById('todayCases').innerText = "?";
+    document.getElementById('deaths').innerText = "?";
+    document.getElementById('todayDeaths').innerText = "?";
+    document.getElementById('recovered').innerText = "?";
+    document.getElementById('critical').innerText = "?";
     flag.src = errimg;
 }
 function all(){
-    flag.src = errimg;
+    flag.src = allimg;
     sel.value = "All";
     document.getElementById('cases').innerText = allData['cases'];
     document.getElementById('todayCases').innerText = allData['todayCases'];
@@ -241,7 +243,7 @@ function hashChange(){
     all();
   }else if((country)&&(countries.indexOf(country))>0){
     flag.src = errimg;
-    data = Data[countries.indexOf(country)-1];
+    var data = Data[countries.indexOf(country)-1];
     setflag(data['country']);
     sel.value = data['country'];
     document.getElementById('cases').innerText = data['cases'];
