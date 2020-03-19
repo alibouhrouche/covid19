@@ -15,4 +15,5 @@ function checkHttps(req, res, next) {
 
 app.all("*", checkHttps);
 app.use(express.static("public"));
+
 app.listen(process.env.PORT);
