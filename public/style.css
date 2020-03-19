@@ -149,6 +149,11 @@ select, button, textarea {
 .card-h1 {
   display: flex;
   align-self: center;
+  vertical-align: middle;
+}
+
+.card-h1 .svg-icon {
+  vertical-align: middle;
 }
 
 .svg-icon {
