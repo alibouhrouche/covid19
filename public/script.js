@@ -1,10 +1,6 @@
 var countries = [];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
-var flag = document.getElementById('flag');
-//var errimg = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
-var errimg = "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2F2049.png?v=1584630421657";
-var allimg = "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2F1f310.png?v=1584630413161";
 var Data = [];
 var out = {
   country : document.getElementById('country'),
@@ -16,107 +12,6 @@ var out = {
   critical : document.getElementById('critical'),
   flag : document.getElementById('flag')
 };
-var allData = {
-  "country": "All",
-  "cases": 0,
-  "todayCases": 0,
-  "deaths": 0,
-  "todayDeaths": 0,
-  "recovered": 0,
-  "critical": 0
-};
-var allCountries = [];
-var count = 0;
-function fixcountry(country){
-  switch (country){
-    case 'Russia' :
-      return 'Russian Federation';
-    case 'S. Korea':
-      return 'Korea (Republic of)';
-    default:
-      return country;
-  }
-}
-function getalpha2Code(country){
-  country = fixcountry(country);
-  for (let i = 0; i < allCountries.length; i++) {
-    const element = allCountries[i];
-    if((element.name == country)){
-      return element.alpha2Code;
-    }else{
-      for (let i = 0; i < element.altSpellings.length; i++) {
-        const e1 = element.altSpellings[i];
-        if(e1 == country){
-          return element.alpha2Code;
-        }
-      }
-    }
-  }
-  return false;
-}
-function getallcountries(next){
-  fetch("https://restcountries.eu/rest/v2/all?fields=name;altSpellings;alpha2Code")
-  .then(
-      function(response) {
-      if (response.status !== 200) {
-
-          return;
-      }
-      // Examine the text in the response
-      response.json().then(function(data) {
-          allCountries = data;
-          if(typeof(next) == "function"){
-            next();
-          }
-      });
-      }
-  )
-  .catch(function(err) {
-      
-  });
-}
-/*function getData(next){
-  fetch("https://coronavirus-19-api.herokuapp.com/countries")
-  .then(
-      function(response) {
-      if (response.status !== 200) {
-          err();
-          return;
-      }
-      // Examine the text in the response
-      response.json().then(function(data) {
-          Data = data;
-          countries = ["All"];
-          for(var c in Data){
-            countries.push(Data[c]["country"]);
-          }
-          allData = {
-            country: "All",
-            cases:0,
-            todayCases:0,
-            deaths:0,
-            todayDeaths:0,
-            recovered:0,
-            critical:0
-          };
-          for (let i = 0; i < Data.length; i++) {
-            const e = Data[i];
-            allData['cases'] += e['cases'];
-            allData['todayCases'] += e['todayCases'];
-            allData['deaths'] += e['deaths'];
-            allData['todayDeaths'] += e['todayDeaths'];
-            allData['recovered'] += e['recovered'];
-            allData['critical'] += e['critical'];
-          }
-          autocomplete(sel, countries);
-          getallcountries(next?next:NULL);
-      });
-      }
-  )
-  .catch(function(err) {
-      err();
-  });
-}*/
 function getData(next){
   fetch("/data")
   .then(
@@ -130,7 +25,9 @@ function getData(next){
           Data = data;
           countries = data.map(({ country }) => country);
           autocomplete(sel, countries);
-          getallcountries(next?next:null);
+          if(typeof(next) == "function"){
+            next();
+          }
       });
       }
   )
@@ -242,51 +139,32 @@ flag.addEventListener("error", function(){
 flag.addEventListener("click", function(){
   getData(hashChange);
 });
-function setflag(country){
-    var alpha2Code = getalpha2Code(country);
-    if(alpha2Code){
-      flag.src = "https://www.countryflags.io/" + alpha2Code + "/shiny/64.png";
-    }else{
-      flag.src = errimg;
-    }
-}
 function err(){
-    document.getElementById('country').innerText = "?";
-    document.getElementById('cases').innerText = "?";
-    document.getElementById('todayCases').innerText = "?";
-    document.getElementById('deaths').innerText = "?";
-    document.getElementById('todayDeaths').innerText = "?";
-    document.getElementById('recovered').innerText = "?";
-    document.getElementById('critical').innerText = "?";
-    flag.src = errimg;
+  sel.value = '?';
+  out.cases.innerText = '?';
+  out.todayCases.innerText = '?';
+  out.deaths.innerText = '?';
+  out.todayDeaths.innerText = '?';
+  out.recovered.innerText = '?';
+  out.critical.innerText = '?';
+  out.flag.className = "fflag ff-xl ff-wave fflag-none";
+  out.flag.title = "none";
 }
-function all(){
-    flag.src = allimg;
-    sel.value = "All";
-    document.getElementById('cases').innerText = allData['cases'];
-    document.getElementById('todayCases').innerText = allData['todayCases'];
-    document.getElementById('deaths').innerText = allData['deaths'];
-    document.getElementById('todayDeaths').innerText = allData['todayDeaths'];
-    document.getElementById('recovered').innerText = allData['recovered'];
-    document.getElementById('critical').innerText = allData['critical'];
-  }
 function hashChange(){
   var country = decodeURI(location.hash.slice(1));
-  if((country == "All")||(country == "")){
-    all();
-  }else if((country)&&(countries.indexOf(country))>0){
-    flag.src = errimg;
+  country = (country == "") ? "All" : country;
+  console.log(country);
+  if((country)&&(countries.indexOf(country))>=0){
     var data = Data[countries.indexOf(country)];
-    setflag(data['country']);
     sel.value = data['country'];
     out.cases.innerText = data['cases'];
     out.todayCases.innerText = data['todayCases'];
-    document.getElementById('deaths').innerText = data['deaths'];
-    document.getElementById('todayDeaths').innerText = data['todayDeaths'];
-    document.getElementById('recovered').innerText = data['recovered'];
-    document.getElementById('critical').innerText = data['critical'];
-    document.getElementById('flag').className = "fflag ff-xl ff-wave fflag-" + (data['code'] ? data['code']:'none');
-    document.getElementById('flag').title = data['code'] ? data['code']:'none';
+    out.deaths.innerText = data['deaths'];
+    out.todayDeaths.innerText = data['todayDeaths'];
+    out.recovered.innerText = data['recovered'];
+    out.critical.innerText = data['critical'];
+    out.flag.className = "fflag ff-xl ff-wave fflag-" + (data['code'] ? data['code']:'none');
+    out.flag.title = data['code'] ? data['code']:'none';
     }else{
         err();
     }
