@@ -19,6 +19,8 @@ var allCountries = [];
 var count = 0;
 function fixcountry(country){
   switch (country){
+    case 'Russia' :
+      return 'Russian Federation';
     case 'S. Korea':
       return 'Korea (Republic of)';
     default:
