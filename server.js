@@ -21,8 +21,17 @@ app.use(express.static("public"));
 app.get("/list",(req,res)=>{
   res.json(countries);
 });
-app.get("/flag",(req,res)=>{
-  res.json(countries);
+app.get("/flag/:name", async (req, res, next) => {
+    
+    function foundData(){
+        return fetch(`https://www.countryflags.io/${req.params.name}/shiny/64.png`);
+    }
+    const processData = async () => {
+    const Data = await foundData()
+    var ResponseData = await Data.json()
+
+    }
+    processData()
 });
 app.get("/data",async (request, response, next) => {
   function foundData(){
