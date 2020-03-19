@@ -1,6 +1,7 @@
 var express = require("express");
 var async  = require('express-async-await');
 var fetch = require('node-fetch');
+var countries = require('./list.js');
 var app = express();
 
 function checkHttps(req, res, next) {
@@ -17,6 +18,12 @@ function checkHttps(req, res, next) {
 
 app.all("*", checkHttps);
 app.use(express.static("public"));
+app.get("/list",(req,res)=>{
+  res.json(countries);
+});
+app.get("/flag",(req,res)=>{
+  res.json(countries);
+});
 app.get("/data",async (request, response, next) => {
   function foundData(){
       return fetch("https://coronavirus-19-api.herokuapp.com/countries")

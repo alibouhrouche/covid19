@@ -81,7 +81,7 @@ var countries = [
   },
   {
     name: "Bolivia",
-    code: false
+    code: "BO"
   },
   {
     name: "Bosnia and Herzegovina",
@@ -93,7 +93,7 @@ var countries = [
   },
   {
     name: "Brunei",
-    code: false
+    code: "BN"
   },
   {
     name: "Bulgaria",
@@ -105,7 +105,7 @@ var countries = [
   },
   {
     name: "CAR",
-    code: false
+    code: "CF"
   },
   {
     name: "Cambodia",
@@ -181,7 +181,7 @@ var countries = [
   },
   {
     name: "Diamond Princess",
-    code: false
+    code: "UK"
   },
   {
     name: "Djibouti",
@@ -221,7 +221,7 @@ var countries = [
   },
   {
     name: "Faeroe Islands",
-    code: false
+    code: "FO"
   },
   {
     name: "Fiji",
@@ -321,7 +321,7 @@ var countries = [
   },
   {
     name: "Iran",
-    code: false
+    code: "IR"
   },
   {
     name: "Iraq",
@@ -433,7 +433,7 @@ var countries = [
   },
   {
     name: "Moldova",
-    code: false
+    code: "MD"
   },
   {
     name: "Monaco",
@@ -485,7 +485,7 @@ var countries = [
   },
   {
     name: "North Macedonia",
-    code: false
+    code: "MK"
   },
   {
     name: "Norway",
@@ -501,7 +501,7 @@ var countries = [
   },
   {
     name: "Palestine",
-    code: false
+    code: "PS"
   },
   {
     name: "Panama",
@@ -561,7 +561,7 @@ var countries = [
   },
   {
     name: "Saint Martin",
-    code: false
+    code: "MF"
   },
   {
     name: "San Marino",
@@ -589,7 +589,7 @@ var countries = [
   },
   {
     name: "Sint Maarten",
-    code: false
+    code: "SX"
   },
   {
     name: "Slovakia",
@@ -617,11 +617,11 @@ var countries = [
   },
   {
     name: "St. Barth",
-    code: false
+    code: "BL"
   },
   {
     name: "St. Vincent Grenadines",
-    code: false
+    code: "VC"
   },
   {
     name: "Sudan",
@@ -645,7 +645,7 @@ var countries = [
   },
   {
     name: "Tanzania",
-    code: false
+    code: "TZ"
   },
   {
     name: "Thailand",
@@ -697,18 +697,19 @@ var countries = [
   },
   {
     name: "Vatican City",
-    code: false
+    code: "VA"
   },
   {
     name: "Venezuela",
-    code: false
+    code: "VE"
   },
   {
     name: "Vietnam",
-    code: false
+    code: "VN"
   },
   {
     name: "Zambia",
     code: "ZM"
   }
 ];
+module.exports = countries;
