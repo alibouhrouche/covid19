@@ -37,9 +37,6 @@
     <h1>
       <form autocomplete="off">
         <label for="country">Choose a Country: <div id="flag" class="fflag ff-xl ff-wave" title="MA"></div></label>
-      <br>
-      <h2><span id="order">0</span>° </h2>
-      <br>
       <div class="autocomplete">
         <input id="country" placeholder="Country">
       </div>
@@ -48,6 +45,13 @@
       </datalist>
       </form>
     </h1>
+    <h2><input
+        type="text"
+        name="token"
+        id="order"
+        inputmode="numeric"
+        pattern="[0-9]*"
+      />/<span id="all">0</span></h2>
     <div class="row">
       <div class="column">
         <div class="card" id="cases-div">

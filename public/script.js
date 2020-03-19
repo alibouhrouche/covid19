@@ -25,6 +25,7 @@ function getData(next){
       response.json().then(function(data) {
           Data = data;
           countries = data.map(({ country }) => country);
+          document.getElementById('all').innerText = data.length-1;
           autocomplete(sel, countries);
           if(typeof(next) == "function"){
             next();
@@ -167,11 +168,16 @@ function hashChange(){
     out.critical.innerText = data['critical'];
     out.flag.className = "fflag ff-xl ff-wave fflag-" + (data['code'] ? data['code']:'none');
     out.flag.title = data['code'] ? data['code']:'none';
-    out.order.innerText = i;
+    out.order.value = i;
     }else{
         err();
     }
 }
+out.order.addEventListener('change', function (e){
+  if (!numberInput.validity.valueMissing) {
+    location.hash = "#" + ;
+  }
+});
 window.addEventListener('hashchange', function (e) {
     e.preventDefault();
     hashChange();

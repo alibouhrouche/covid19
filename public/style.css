@@ -217,4 +217,7 @@
     background-color: DodgerBlue !important;
     color: #ffffff;
   }
-  
+  #order {
+    display: inline;
+    width: 3em;
+  }
