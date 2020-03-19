@@ -1,4 +1,6 @@
 var express = require("express");
+var async  = require('express-async-await');
+var fetch = require('node-fetch');
 var app = express();
 
 function checkHttps(req, res, next) {
@@ -15,5 +17,36 @@ function checkHttps(req, res, next) {
 
 app.all("*", checkHttps);
 app.use(express.static("public"));
-
+app.get("/data",async (request, response, next) => {
+  function foundData(){
+      return fetch("https://coronavirus-19-api.herokuapp.com/countries")
+  }
+  const processData = async () => {
+  const Data = await foundData()
+  var ResponseData = await Data.json()
+  var ResData = [
+    {
+      "country": "All",
+      "cases": 0,
+      "todayCases": 0,
+      "deaths": 0,
+      "todayDeaths": 0,
+      "recovered": 0,
+      "critical": 0
+    }
+  ];
+  for (let i = 0; i < ResponseData.length; i++) {
+    const e = ResponseData[i];
+    ResData[0]['cases'] += e['cases'];
+    ResData[0]['todayCases'] += e['todayCases'];
+    ResData[0]['deaths'] += e['deaths'];
+    ResData[0]['todayDeaths'] += e['todayDeaths'];
+    ResData[0]['recovered'] += e['recovered'];
+    ResData[0]['critical'] += e['critical'];
+  }
+  
+  response.json(ResData);
+  }
+  processData()
+});
 app.listen(process.env.PORT);
