@@ -64,6 +64,7 @@
     --bg: #BF360C;
     --hover: #E64A19;  
   }
+  
 
   .n {
       color: #ffffff;
@@ -103,10 +104,9 @@
     background: #415c73;
   }
   
-  img {
+ #flag {
     vertical-align: middle;
-    height: 64px;
-    width: 64px;
+    padding: 3px;
   }
   
   #country {

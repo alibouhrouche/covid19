@@ -6,6 +6,16 @@ var flag = document.getElementById('flag');
 var errimg = "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2F2049.png?v=1584630421657";
 var allimg = "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2F1f310.png?v=1584630413161";
 var Data = [];
+var out = {
+  country : document.getElementById('country'),
+  cases : document.getElementById('cases'),
+  todayCases : document.getElementById('todayCases'),  
+  deaths : document.getElementById('deaths'),
+  todayDeaths : document.getElementById('todayDeaths'),
+  recovered : document.getElementById('recovered'),
+  critical : document.getElementById('critical'),
+  flag : document.getElementById('flag')
+};
 var allData = {
   "country": "All",
   "cases": 0,
@@ -266,15 +276,17 @@ function hashChange(){
     all();
   }else if((country)&&(countries.indexOf(country))>0){
     flag.src = errimg;
-    var data = Data[countries.indexOf(country)-1];
+    var data = Data[countries.indexOf(country)];
     setflag(data['country']);
     sel.value = data['country'];
-    document.getElementById('cases').innerText = data['cases'];
-    document.getElementById('todayCases').innerText = data['todayCases'];
+    out.cases.innerText = data['cases'];
+    out.todayCases.innerText = data['todayCases'];
     document.getElementById('deaths').innerText = data['deaths'];
     document.getElementById('todayDeaths').innerText = data['todayDeaths'];
     document.getElementById('recovered').innerText = data['recovered'];
     document.getElementById('critical').innerText = data['critical'];
+    document.getElementById('flag').className = "fflag ff-xl ff-wave fflag-" + (data['code'] ? data['code']:'none');
+    document.getElementById('flag').title = data['code'] ? data['code']:'none';
     }else{
         err();
     }
