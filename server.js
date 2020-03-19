@@ -43,8 +43,17 @@ app.get("/data",async (request, response, next) => {
     ResData[0]['todayDeaths'] += e['todayDeaths'];
     ResData[0]['recovered'] += e['recovered'];
     ResData[0]['critical'] += e['critical'];
+    ResData.push({
+      "country": e['country'],
+      "country": e['country'],
+      "cases": e['cases'],
+      "todayCases": e['todayCases'],
+      "deaths": e['deaths'],
+      "todayDeaths": e['todayDeaths'],
+      "recovered": e['recovered'],
+      "critical": e['critical']
+    });
   }
-  
   response.json(ResData);
   }
   processData()
