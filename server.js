@@ -28,7 +28,7 @@ app.get("/flag/:name", async (req, res, next) => {
     }
     const processData = async () => {
     const Data = await foundData()
-    var ResponseData = await Data.json()
+    var ResponseData = await Data.arrayBuffer()
 
     }
     processData()
@@ -62,7 +62,6 @@ app.get("/data",async (request, response, next) => {
     ResData[0]['critical'] += e['critical'];
     ResData.push({
       "country": e['country'],
-      "order": i+1,
       "cases": e['cases'],
       "todayCases": e['todayCases'],
       "deaths": e['deaths'],
