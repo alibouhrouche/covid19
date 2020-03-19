@@ -65,7 +65,7 @@ function getallcountries(next){
       
   });
 }
-function getData(next){
+/*function getData(next){
   fetch("https://coronavirus-19-api.herokuapp.com/countries")
   .then(
       function(response) {
@@ -100,6 +100,27 @@ function getData(next){
           }
           autocomplete(sel, countries);
           getallcountries(next?next:NULL);
+      });
+      }
+  )
+  .catch(function(err) {
+      err();
+  });
+}*/
+function getData(next){
+  fetch("/data")
+  .then(
+      function(response) {
+      if (response.status !== 200) {
+          err();
+          return;
+      }
+      // Examine the text in the response
+      response.json().then(function(data) {
+          Data = data;
+          countries = data.map(({ country }) => country);
+          autocomplete(sel, countries);
+          getallcountries(next?next:null);
       });
       }
   )

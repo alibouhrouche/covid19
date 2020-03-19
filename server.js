@@ -63,7 +63,7 @@ app.get("/data",async (request, response, next) => {
     var cntry = countries.find(({ name }) => name === e.country);
     ResData.push({
       "country": e['country'],
-      "code": cntry ? cntry.code : false,
+      "code": (cntry && cntry.code) ? cntry.code : false,
       "cases": e['cases'],
       "todayCases": e['todayCases'],
       "deaths": e['deaths'],
