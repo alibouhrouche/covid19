@@ -49,6 +49,7 @@ self.addEventListener('fetch', (event) => {
         event.waitUntil(
             update(event.request)
             .then(refresh)
+            .catch(()=>{return Promise.resolve('Success')})
         );
         return;
       }
