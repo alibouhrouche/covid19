@@ -25,22 +25,22 @@ app.get("/favicon.ico",async (req, res, next) => {
   const processData = async () => {
   const Data = await foundData()
   var ResponseData = await Data.buffer()
-  res.set('Content-Type', 'image/x-icon')
+
   res.send(ResponseData);
   }
   processData()
 });
 app.get("/flags",async (req, res, next) => {
-  function foundData(){
-      return fetch("https://coronavirus-19-api.herokuapp.com/countries")
+     function foundData(){
+       return fetch("https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/flagSprite60.png?v=1584651917190")
   }
   const processData = async () => {
   const Data = await foundData()
   var ResponseData = await Data.buffer()
-  res.set('Content-Type', 'image/png')
-  res.send('');
+  res.send(ResponseData);
   }
   processData()
+  res.set('Content-Type', 'image/png')
 });
 app.get("/data",async (request, response, next) => {
   function foundData(){
