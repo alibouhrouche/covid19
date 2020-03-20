@@ -2,8 +2,8 @@ var countries = [];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var Data = [];
-var config = localStorage.getItem('config');
-if (config == null){
+var cookiesaccept = localStorage.getItem('cookiesaccept');
+if (cookiesaccept){
   
 }
 var out = {
