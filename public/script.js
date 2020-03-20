@@ -153,8 +153,7 @@ function err(){
 function hashChange(){
   var country = decodeURI(location.hash.slice(3));
   country = (country == "") ? "All" : country;
-  ga('set', 'page', '/?c=' + country);
-  ga('send', 'pageview');
+  gtag('config', 'UA-161449789-1', {'page_path': '/' + location.hash});
   var i =countries.indexOf(country);
   if((country)&&(i>=0)){
     var data = Data[countries.indexOf(country)];
