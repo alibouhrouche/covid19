@@ -147,7 +147,8 @@ function err(){
   out.critical.innerText = '?';
   out.flag.className = "fflag ff-xl ff-wave fflag-none";
   out.flag.title = "none";
-  out.order.innerText = "0";
+  out.order.value = "0";
+  document.title = "Track Corona Virus Spread in The World";
 }
 function hashChange(){
   var country = decodeURI(location.hash.slice(3));
@@ -167,8 +168,9 @@ function hashChange(){
     out.flag.className = "fflag ff-xl ff-wave fflag-" + (data['code'] ? data['code']:'none');
     out.flag.title = data['code'] ? data['code']:'none';
     out.order.value = i;
-    }else{
-        err();
+    document.title = "Track Corona Virus Spread in " + (data['country'] != "All" ? data['country']: "The World");
+    }else{       
+      err();
     }
 }
 out.order.addEventListener('change', function (e){
