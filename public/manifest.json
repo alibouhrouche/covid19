@@ -1,0 +1,22 @@
+{
+    "name": "Corona Virus Tracker",
+    "short_name": "Covid19",
+    "lang": "en",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#202b38",
+    "icons": [
+      {
+        "src": "https://cdn.statically.io/img/cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fsmilie-4881520_640.png?w=512&h=512",
+        "sizes": "512x512"
+      },
+      {
+        "src": "https://cdn.statically.io/img/cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fsmilie-4881520_640.png?w=256&h=256",
+        "sizes": "256x256"
+      },
+      {
+        "src": "https://cdn.statically.io/img/cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fsmilie-4881520_640.png?w=192&h=192",
+        "sizes": "192x192"
+      }
+    ]
+}
