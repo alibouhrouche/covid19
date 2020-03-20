@@ -3,8 +3,10 @@
     "short_name": "Covid19",
     "lang": "en",
     "start_url": "/",
+    "orientation": "any",
     "display": "standalone",
     "theme_color": "#202b38",
+    "background_color": "#202b38",
     "icons": [
       {
         "src": "https://cdn.statically.io/img/cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fsmilie-4881520_640.png?w=512&h=512",
