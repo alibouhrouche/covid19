@@ -1,33 +1,21 @@
 "use strict";
+function isOnline () {
+  var connectionStatus = document.getElementById('nonet');
+
+  if (navigator.onLine){
+    connectionStatus.style.display = "none";
+  } else {
+    connectionStatus.style.display = "block";
+  }
+}
+
+window.addEventListener('online', isOnline);
+window.addEventListener('offline', isOnline);
+isOnline();
 var countries = [];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var Data = [];
-var cookiesaccept = localStorage.getItem('cookiesaccept');
-var loadJS = function( src, cb, ordered ){
-  var tmp;
-  var ref = document.getElementsByTagName( "script" )[ 0 ];
-  var script = document.createElement( "script" );
-  if (typeof(cb) === 'boolean') {
-    tmp = ordered;
-    ordered = cb;
-    cb = tmp;
-  }
-  script.src = src;
-  script.async = !ordered;
-  ref.parentNode.insertBefore( script, ref );
-  if (cb && typeof(cb) === "function") {
-    script.onload = cb;
-  }
-  return script;
-};
-if (cookiesaccept){
-  if(cookiesaccept == "Yes"){
-    loadJS();
-  }
-}else{
-  
-}
 var out = {
   country : document.getElementById('country'),
   cases : document.getElementById('cases'),
@@ -179,7 +167,6 @@ function err(){
 function hashChange(){
   var country = decodeURI(location.hash.slice(3));
   country = (country == "") ? "All" : country;
-  //gtag('config', 'UA-161449789-1', {'page_path': '/' + location.hash});
   var i =countries.indexOf(country);
   if((country)&&(i>=0)){
     var data = Data[countries.indexOf(country)];
