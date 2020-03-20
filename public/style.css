@@ -217,10 +217,10 @@
     background-color: DodgerBlue !important;
     color: #ffffff;
   }
-  #order {
-    display: inline;
+#order {
+    display: inline-block;
     width: 3em;
-  }
+}
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: initial; 

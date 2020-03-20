@@ -178,6 +178,8 @@ out.order.addEventListener('change', function (e){
 });
 window.addEventListener('hashchange', function (e) {
     e.preventDefault();
+    ga('set', 'page', '/' + );
+    ga('send', 'pageview');
     hashChange();
 });
 getData(hashChange);
