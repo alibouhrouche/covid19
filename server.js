@@ -18,17 +18,29 @@ function checkHttps(req, res, next) {
 
 app.all("*", checkHttps);
 app.use(express.static("public"));
-app.get("/favicon.ico",async (request, response, next) => {
-  
+app.get("/favicon.ico",async (req, res, next) => {
+  function foundData(){
+       return fetch("https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/favicon.ico?v=1584540676955")
+  }
+  const processData = async () => {
+  const Data = await foundData()
+  var ResponseData = await Data.buffer()
+  res.set('Content-Type', 'image/x-icon')
+  res.send(ResponseData);
+  }
+  processData()
 });
-app.get("/flags",async (request, response, next) => {
+app.get("/flags",async (req, res, next) => {
   function foundData(){
       return fetch("https://coronavirus-19-api.herokuapp.com/countries")
   }
   const processData = async () => {
   const Data = await foundData()
-  var ResponseData = await Data.json()
+  var ResponseData = await Data.buffer()
+  res.set('Content-Type', 'image/png')
+  res.send('');
   }
+  processData()
 });
 app.get("/data",async (request, response, next) => {
   function foundData(){
