@@ -2,6 +2,10 @@ var countries = [];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var Data = [];
+var config = localStorage.getItem('config');
+if (config == null){
+  
+}
 var out = {
   country : document.getElementById('country'),
   cases : document.getElementById('cases'),
@@ -153,7 +157,7 @@ function err(){
 function hashChange(){
   var country = decodeURI(location.hash.slice(3));
   country = (country == "") ? "All" : country;
-  gtag('config', 'UA-161449789-1', {'page_path': '/' + location.hash});
+  //gtag('config', 'UA-161449789-1', {'page_path': '/' + location.hash});
   var i =countries.indexOf(country);
   if((country)&&(i>=0)){
     var data = Data[countries.indexOf(country)];
