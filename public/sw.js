@@ -2,9 +2,10 @@ var version = 'v1::1::';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {
-      const cache = await caches.open(version + 'static');
+      const cache = await caches.open(version);
       await cache.addAll([
         '/',
+        '/data',
         '/style.css',
         '/script.js',
         '/icons.svg',
@@ -39,16 +40,14 @@ self.addEventListener("activate", function(event) {
 self.addEventListener('fetch', (event) => {
     // Parse the URL:
     const requestURL = new URL(event.request.url);
-  
-    // Handle requests to a particular host specifically
-    if (requestURL.hostname == 'cdn.glitch.com') {
-      //event.respondWith(/* some combination of patterns */);
-      return;
-    }
     // Routing for local URLs
     if (requestURL.origin == location.origin) {
       if (requestURL.pathname.endsWith('.json')) {
-        event.respondWith(/* some other combination of patterns */);
+        evt.respondWith(fromCache(evt.request));
+        evt.waitUntil(
+            update(evt.request)
+            .then(refresh)
+        );
         return;
       }
     }
@@ -59,3 +58,25 @@ self.addEventListener('fetch', (event) => {
       return cachedResponse || fetch(event.request);
     }());
 });
+
+function fromCache(request) {
+    return caches.open(version).then(function (cache) {
+      return cache.match(request);
+    });
+}
+function update(request) {
+    return caches.open(version).then(function (cache) {
+      return fetch(request).then(function (response) {
+        return cache.put(request, response.clone()).then(function () {
+          return response;
+        });
+      });
+    });
+}
+function refresh(response) {
+    return self.clients.matchAll().then(function (clients) {
+    clients.forEach(function (client) {
+      client.postMessage('data-update');
+    });
+  });
+}

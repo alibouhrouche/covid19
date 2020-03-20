@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-async-await": "^1.1.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "http-proxy-middleware": "^1.0.3"
   },
   "engines": {
     "node": "12.x"

@@ -1,19 +1,19 @@
 var express = require("express");
 var async  = require('express-async-await');
 var fetch = require('node-fetch');
-//const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 var countries = require('./list.js');
 var app = express();
 
-/*const options = {
+const options = {
   target: 'https://cdn.glitch.com/', // target host
   changeOrigin: true, // needed for virtual hosted sites
   ws: false, // proxy websockets
   pathRewrite: {
-    '^/favicon.ico': '/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/favicon.ico?v=1584540676955', // rewrite path
-    '^/flags': '/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/flagSprite60.png?v=1584651917190' // remove base path
+    '^/favicon.ico': '/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/favicon.ico?v=1584540676955' // rewrite path
+    //'^/flags': '/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/flagSprite60.png?v=1584651917190' // remove base path
   }
-};*/
+};
 
 function checkHttps(req, res, next) {
   // protocol check, if http, redirect to https
@@ -41,9 +41,9 @@ app.use(express.static("public"));
   }
   processData()
 });*/
-//var middleware = createProxyMiddleware(options)
-//app.use('/favicon.ico', middleware);
-//app.get("/flags", middleware);
+var middleware = createProxyMiddleware(options)
+app.use('/favicon.ico', middleware);
+("/flags", middleware);
 app.get("/data",async (request, response, next) => {
   function foundData(){
       return fetch("https://coronavirus-19-api.herokuapp.com/countries")
