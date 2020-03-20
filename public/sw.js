@@ -13,6 +13,7 @@ self.addEventListener("install", (event) => {
         '/favicon.ico',
         'https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/flagSprite60.png?v=1584651917190'
       ]);
+        return self.skipWaiting();
     }());
 });
 
@@ -37,15 +38,16 @@ self.addEventListener("activate", function(event) {
     );
 });
 
+
 self.addEventListener('fetch', (event) => {
     // Parse the URL:
     const requestURL = new URL(event.request.url);
     // Routing for local URLs
     if (requestURL.origin == location.origin) {
-      if (requestURL.pathname.endsWith('.json')) {
-        evt.respondWith(fromCache(evt.request));
-        evt.waitUntil(
-            update(evt.request)
+      if (requestURL.pathname == "/data") {
+        event.respondWith(fromCache(event.request));
+        event.waitUntil(
+            update(event.request)
             .then(refresh)
         );
         return;
