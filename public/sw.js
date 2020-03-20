@@ -19,4 +19,4 @@ self.addEventListener("install", function(event) {
           console.log('WORKER: install completed');
         })
     );
-  });
+});
