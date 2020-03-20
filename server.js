@@ -18,6 +18,12 @@ function checkHttps(req, res, next) {
 
 app.all("*", checkHttps);
 app.use(express.static("public"));
+app.get("/favicon.ico",async (request, response, next) => {
+  
+});
+app.get("/flags",async (request, response, next) => {
+  
+});
 app.get("/data",async (request, response, next) => {
   function foundData(){
       return fetch("https://coronavirus-19-api.herokuapp.com/countries")
