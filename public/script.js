@@ -1,10 +1,30 @@
+"use strict";
 var countries = [];
 var sel = document.getElementById('country');
 var list = document.getElementById('country-list');
 var Data = [];
 var cookiesaccept = localStorage.getItem('cookiesaccept');
+var loadJS = function( src, cb, ordered ){
+  var tmp;
+  var ref = document.getElementsByTagName( "script" )[ 0 ];
+  var script = document.createElement( "script" );
+  if (typeof(cb) === 'boolean') {
+    tmp = ordered;
+    ordered = cb;
+    cb = tmp;
+  }
+  script.src = src;
+  script.async = !ordered;
+  ref.parentNode.insertBefore( script, ref );
+  if (cb && typeof(cb) === "function") {
+    script.onload = cb;
+  }
+  return script;
+};
 if (cookiesaccept){
-
+  if(cookiesaccept == "Yes"){
+    loadJS();
+  }
 }else{
   
 }

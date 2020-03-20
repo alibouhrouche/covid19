@@ -252,13 +252,13 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   padding: 5px;
   background-color: #1A237E;
-  visibility: hidden;
+  display: none;
 }
 #nonet {
   width: 100%;
   padding: 5px;
   background-color: #B71C1C;
-  visibility: hidden;
+  display: none;
 }
 #abtn {
   background-color: #1B5E20;

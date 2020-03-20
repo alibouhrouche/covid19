@@ -344,6 +344,10 @@ var countries = [
     code: "IE"
   },
   {
+    name: "Isle of Man",
+    code: "IM"
+  },
+  {
     name: "Israel",
     code: "IL"
   },
@@ -492,6 +496,10 @@ var countries = [
     code: "NI"
   },
   {
+    name: "Niger",
+    code: "NG"
+  },
+  {
     name: "Nigeria",
     code: "NG"
   },
@@ -518,6 +526,10 @@ var countries = [
   {
     name: "Panama",
     code: "PA"
+  },
+  {
+    name: "Papua New Guinea",
+    code: "PG"
   },
   {
     name: "Paraguay",
