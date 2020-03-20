@@ -22,7 +22,13 @@ app.get("/favicon.ico",async (request, response, next) => {
   
 });
 app.get("/flags",async (request, response, next) => {
-  
+  function foundData(){
+      return fetch("https://coronavirus-19-api.herokuapp.com/countries")
+  }
+  const processData = async () => {
+  const Data = await foundData()
+  var ResponseData = await Data.json()
+  }
 });
 app.get("/data",async (request, response, next) => {
   function foundData(){
