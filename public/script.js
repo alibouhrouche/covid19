@@ -4,6 +4,8 @@ var list = document.getElementById('country-list');
 var Data = [];
 var cookiesaccept = localStorage.getItem('cookiesaccept');
 if (cookiesaccept){
+
+}else{
   
 }
 var out = {

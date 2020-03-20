@@ -16,6 +16,10 @@ var countries = [
     code: "AD"
   },
   {
+    name: "Angola",
+    code: "AO"
+  },
+  {
     name: "Antigua and Barbuda",
     code: "AG"
   },
@@ -102,6 +106,10 @@ var countries = [
   {
     name: "Burkina Faso",
     code: "BF"
+  },
+  {
+    name: "Cabo Verde",
+    code: "CV"
   },
   {
     name: "CAR",
@@ -294,6 +302,10 @@ var countries = [
   {
     name: "Guyana",
     code: "GY"
+  },
+  {
+    name: "Haiti",
+    code: "HT"
   },
   {
     name: "Honduras",
