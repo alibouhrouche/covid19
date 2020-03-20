@@ -1,4 +1,4 @@
-var version = 'v1::1::';
+var version = 'v1::0001::';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {

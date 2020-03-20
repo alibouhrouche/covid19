@@ -24,12 +24,12 @@
         "type": "image/webp"
       },
       {
-        "src": "https://cdn.statically.io/img/cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fsmilie-4881520_640.png?w=512&h=512",
+        "src": "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fcovid19_512x512.png?v=1584739236915",
         "sizes": "512x512",
         "type": "image/png"
       },
       {
-        "src": "https://cdn.statically.io/img/cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fsmilie-4881520_640.png?w=256&h=256",
+        "src": "https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae%2Fcovid19_256x256.png?v=1584738842108",
         "sizes": "256x256",
         "type": "image/png"
       },
