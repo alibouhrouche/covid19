@@ -69,7 +69,7 @@ function autocomplete(inp, arr) {
                 b.addEventListener("click", function(e) {
                 /*insert the value for the autocomplete text field:*/
                 inp.value = this.getElementsByTagName("input")[0].value;
-                location.hash = "#" + sel.value;
+                location.hash = "#!/" + sel.value;
                 /*close the list of autocompleted values,
                 (or any other open lists of autocompleted values:*/
                 closeAllLists();
@@ -150,8 +150,10 @@ function err(){
   out.order.innerText = "0";
 }
 function hashChange(){
-  var country = decodeURI(location.hash.slice(1));
+  var country = decodeURI(location.hash.slice(3));
   country = (country == "") ? "All" : country;
+  ga('set', 'page', '/?c=' + country);
+  ga('send', 'pageview');
   var i =countries.indexOf(country);
   if((country)&&(i>=0)){
     var data = Data[countries.indexOf(country)];
@@ -173,13 +175,11 @@ out.order.addEventListener('change', function (e){
   if (!out.order.validity.valueMissing) {
     var a = Data[out.order.value];
     if((a)&&(a['country']))
-    location.hash = "#" + a['country'];
+    location.hash = "#!/" + a['country'];
   }
 });
 window.addEventListener('hashchange', function (e) {
     e.preventDefault();
-    ga('set', 'page', '/' + );
-    ga('send', 'pageview');
     hashChange();
 });
 getData(hashChange);
