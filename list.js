@@ -228,6 +228,10 @@ var countries = [
     code: "ET"
   },
   {
+    name: "Eritrea",
+    code: "ET"
+  },
+  {
     name: "Faeroe Islands",
     code: "FO"
   },
@@ -414,6 +418,10 @@ var countries = [
   {
     name: "Macao",
     code: "MO"
+  },
+  {
+    name: "Madagascar",
+    code: "MG"
   },
   {
     name: "Malaysia",
@@ -676,6 +684,10 @@ var countries = [
     code: "TH"
   },
   {
+    name: "Timor-Leste",
+    code: "PT"
+  },
+  {
     name: "Togo",
     code: "TG"
   },
@@ -734,6 +746,10 @@ var countries = [
   {
     name: "Zambia",
     code: "ZM"
+  },
+  {
+    name: "Zimbabwe",
+    code: "ZW"
   }
 ];
 module.exports = countries;
