@@ -167,7 +167,9 @@ function err() {
 }
 function hashChange() {
   var country = decodeURI(location.hash.slice(3));
+  var c = localStorage.getItem('last');
   country = country == "" ? "All" : country;
+  localStorage.setItem('last',country);
   var i = countries.indexOf(country);
   if (country && i >= 0) {
     var data = Data[countries.indexOf(country)];
@@ -199,4 +201,9 @@ window.addEventListener("hashchange", function(e) {
   e.preventDefault();
   hashChange();
 });
+var cntry = decodeURI(location.hash.slice(3));
+var c = localStorage.getItem('last');
+if((c) && (cntry == "")){
+    location.hash = "#!/" + c;
+}
 update();

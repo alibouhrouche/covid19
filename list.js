@@ -229,7 +229,7 @@ var countries = [
   },
   {
     name: "Eritrea",
-    code: "ET"
+    code: "ER"
   },
   {
     name: "Faeroe Islands",
