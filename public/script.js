@@ -32,19 +32,11 @@ if ("serviceWorker" in navigator) {
     .register("/sw.js")
     .then(update)
     .catch(update);
-  /*navigator.serviceWorker.onmessage = function (evt) {
-    if(evt.data.fn){
-      if(evt.data.fn == "data-update"){
-        Data = evt.data.data;
-        hashChange();
-      }
-  }
-  }*/
 } else {
   update();
 }
 async function update() {
-  const networkPromise = fetch("/data");
+  const networkPromise =  navigator.onLine ? fetch("/data") : Promise.reject(new Error('fail'));
   if ("caches" in window) {
     const cachedResponse = await caches.match("/data");
     if (cachedResponse) await displayUpdate(cachedResponse);
@@ -74,8 +66,10 @@ function refresh(){
   });
 }
 out.refreshbtn.addEventListener("click", function() {
-  document.body.className = 'refreshing';
-  refresh();
+  if (navigator.onLine) {
+    document.body.className = 'refreshing';
+    refresh();
+  }
 });
 let _startY;
 document.body.addEventListener('touchstart', e => {
@@ -84,11 +78,8 @@ document.body.addEventListener('touchstart', e => {
 
 document.body.addEventListener('touchmove', e => {
   const y = e.touches[0].pageY;
-  // Activate custom pull-to-refresh effects when at the top of the container
-  // and user is scrolling up.
-
   if (document.scrollingElement.scrollTop === 0 && y > _startY &&
-      !document.body.classList.contains('refreshing')) {
+      !document.body.classList.contains('refreshing') && (navigator.onLine)) {
       document.body.className = 'refreshing';
       refresh();
   }
