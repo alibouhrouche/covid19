@@ -51,16 +51,6 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <div id="Loading" class="modal modal-visible">
-      <div class="modal-content">
-          <div class="loader">
-              <svg class="circular" viewBox="25 25 50 50">
-                  <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-              </svg>
-          </div>
-          <noscript style="color:#ff0000;font-size: 2em;font-weight: bold;">Javascript Required</noscript>
-      </div>
-    </div>
     <div id="nonet">
         <b>You are currently offline.</b>
     </div>
@@ -75,7 +65,8 @@
       </datalist>
     </h1>
     <h2>
-      <label for="order" hidden>The Country Order</label><input
+      <label for="order" hidden>The Country Order</label>
+      <input
         type="number"
         name="order"
         id="order"
