@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
   });
   navigator.serviceWorker.onmessage = function (evt) {
     if(evt.data == "data-update"){
-      getData(hashChange);
+      //getData(hashChange);
     }
   }
 } else {
