@@ -1,4 +1,4 @@
-var version = 'v1::0000000003::sarscov2';
+var version = 'v1::0000000005::sarscov2';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {
@@ -9,7 +9,6 @@ self.addEventListener("install", (event) => {
         '/script.js',
         '/icons.svg',
         '/freakflags.css',
-        '/favicon.ico',
         '/manifest.json',
         'https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/flagSprite60.png?v=1584651917190'
       ]);
@@ -45,7 +44,7 @@ self.addEventListener('fetch', (event) => {
         return;
       }
     }
-      event.respondWith(caches
+    event.respondWith(caches
       .match(request) 
       .then(queriedCache)
     );

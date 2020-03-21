@@ -13,7 +13,6 @@
     "express": "^4.17.1",
     "express-async-await": "^1.1.0",
     "node-fetch": "^2.6.0",
-    "http-proxy-middleware": "^1.0.3",
     "compression": "^1.7.4",
     "mollify": "^2.0.2"
   },
