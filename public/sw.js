@@ -1,4 +1,4 @@
-var version = 'v1::00001::';
+var version = 'v1::00002::';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {
@@ -41,9 +41,9 @@ self.addEventListener("activate", function(event) {
 
 self.addEventListener('fetch', (event) => {
     // Parse the URL:
-    const requestURL = new URL(event.request.url);
+    //const requestURL = new URL(event.request.url);
     // Routing for local URLs
-    if (requestURL.origin == location.origin) {
+    /*if (requestURL.origin == location.origin) {
       if (requestURL.pathname == "/data") {
         event.respondWith(fromCache(event.request));
         event.waitUntil(
@@ -53,7 +53,7 @@ self.addEventListener('fetch', (event) => {
         );
         return;
       }
-    }
+    }*/
   
     // A sensible default pattern
     event.respondWith(async function() {

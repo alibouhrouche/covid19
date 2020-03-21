@@ -30,14 +30,14 @@ var out = {
 if ('serviceWorker' in navigator) {
   console.log('CLIENT: service worker registration in progress.');
   navigator.serviceWorker.register('/sw.js');
-  navigator.serviceWorker.onmessage = function (evt) {
+  /*navigator.serviceWorker.onmessage = function (evt) {
     if(evt.data.fn){
       if(evt.data.fn == "data-update"){
         Data = evt.data.data;
         hashChange();
       }
   }
-  }
+  }*/
 } else {
   console.log('CLIENT: service worker is not supported.');
 }
