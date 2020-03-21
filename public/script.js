@@ -25,11 +25,11 @@ var out = {
   recovered : document.getElementById('recovered'),
   critical : document.getElementById('critical'),
   flag : document.getElementById('flag'),
-  order : document.getElementById('order')
+  order : document.getElementById('order'),
+  spinner: document.getElementById('Loading')
 };
 // ServiceWorker is a progressive technology. Ignore unsupported browsers
 if ('serviceWorker' in navigator) {
-  console.log('CLIENT: service worker registration in progress.');
   navigator.serviceWorker.register('/sw.js');
   /*navigator.serviceWorker.onmessage = function (evt) {
     if(evt.data.fn){
@@ -39,30 +39,28 @@ if ('serviceWorker' in navigator) {
       }
   }
   }*/
-} else {
-  console.log('CLIENT: service worker is not supported.');
 }
 async function update() {
   // Start the network request as soon as possible.
   const networkPromise = fetch('/data');
 
-  //startSpinner();
+  out.spinner.className = "modal-visible";
   if('caches' in window){
-    const cachedResponse = await caches.match('/data');
-    if (cachedResponse) await displayUpdate(cachedResponse);
+    //const cachedResponse = await caches.match('/data');
+    //if (cachedResponse) await displayUpdate(cachedResponse);
   }
   try {
     const networkResponse = await networkPromise;
     if('caches' in window){
-      const cache = await caches.open(version + 'sarscov2-data');
-      cache.put('/data', networkResponse.clone());
+      //const cache = await caches.open(version + 'sarscov2-data');
+      //cache.put('/data', networkResponse.clone());
     }
     await displayUpdate(networkResponse);
   } catch (er) {
     // Maybe report a lack of connectivity to the user.
     err();
   }
-  //stopSpinner();
+  out.spinner.className = "modal-hidden";
   //const networkResponse = await networkPromise;
 }
 
