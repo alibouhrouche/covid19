@@ -23,13 +23,9 @@ self.addEventListener("activate", function(event) {
           return Promise.all(
             keys
               .filter(function (key) {
-                // Filter by keys that don't start with the latest version prefix.
                 return !key.startsWith(version);
               })
               .map(function (key) {
-                /* Return a promise that's fulfilled
-                   when each outdated cache is deleted.
-                */
                 return caches.delete(key);
               })
           );
@@ -39,42 +35,14 @@ self.addEventListener("activate", function(event) {
 
 
 self.addEventListener('fetch', (event) => {
-    // Parse the URL:
     const requestURL = new URL(event.request.url);
-    // Routing for local URLs
     if (requestURL.origin == location.origin) {
       if (requestURL.pathname == "/data") {
         return;
       }
     }
-  
-    // A sensible default pattern
     event.respondWith(async function() {
       const cachedResponse = await caches.match(event.request);
       return cachedResponse || fetch(event.request);
     }());
 });
-
-function fromCache(request) {
-  return caches.open(version).then(function (cache) {
-    return cache.match(request);
-  });
-}
-function update(request) {
-  return caches.open(version).then(function (cache) {
-    return fetch(request).then(function (response) {
-      return cache.put(request, response.clone()).then(function () {
-        return response;
-      });
-    });
-  });
-}
-function refresh(response) {
-  return response.json().then(function (d) {
-    return self.clients.matchAll().then(function (clients) {
-      clients.forEach(function (client) {
-        client.postMessage({fn:"data-update",data:d});
-      });
-    });
-  });
-}
