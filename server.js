@@ -2,6 +2,8 @@ var express = require("express");
 var async  = require('express-async-await');
 var fetch = require('node-fetch');
 const { createProxyMiddleware } = require('http-proxy-middleware');
+var compression = require('compression');
+var minify = require('express-minify');
 var countries = require('./list.js');
 var app = express();
 
@@ -28,7 +30,30 @@ function checkHttps(req, res, next) {
 }
 
 app.all("*", checkHttps);
+app.use(compression({ filter: shouldCompress }))
+app.use(minify({
+  cache: false,
+  uglifyJsModule: null,
+  errorHandler: null,
+  jsMatch: /.js/,
+  cssMatch: /.css/,
+  jsonMatch: /json/,
+  sassMatch: /scss/,
+  lessMatch: /less/,
+  stylusMatch: /stylus/,
+  coffeeScriptMatch: /coffeescript/,
+}));
 app.use(express.static("public"));
+
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
+  }
+
+  // fallback to standard filter function
+  return compression.filter(req, res)
+}
 /*app.get("/favicon.ico",async (req, res, next) => {
   function foundData(){
        return fetch("https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/favicon.ico?v=1584540676955")
