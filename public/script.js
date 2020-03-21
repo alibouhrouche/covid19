@@ -8,9 +8,11 @@ if ('serviceWorker' in navigator) {
     console.log('CLIENT: service worker registration failure.');
   });
   navigator.serviceWorker.onmessage = function (evt) {
-    if(evt.data == "data-update"){
-      //getData(hashChange);
-    }
+    if(evt.data.fn){
+      if(evt.data.fn == "data-update"){
+        console.log(evt.data.data);
+      }
+  }
   }
 } else {
   console.log('CLIENT: service worker is not supported.');

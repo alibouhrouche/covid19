@@ -77,9 +77,11 @@ function update(request) {
     });
 }
 function refresh(response) {
-    return self.clients.matchAll().then(function (clients) {
-    clients.forEach(function (client) {
-      client.postMessage('data-update');
+    return response.json().then(function (data) {
+      return self.clients.matchAll().then(function (clients) {
+        clients.forEach(function (client) {
+          client.postMessage({fn:"data-update",data:response});
+        });
+      });
     });
-  });
 }
