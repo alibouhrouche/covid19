@@ -1,4 +1,4 @@
-var version = 'v1::00002::';
+var version = 'v1::000003::';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {
@@ -36,13 +36,29 @@ self.addEventListener("activate", function(event) {
 
 self.addEventListener('fetch', (event) => {
     const requestURL = new URL(event.request.url);
+    function unableToResolve () {
+  return offlineResponse();
+}
+function offlineResponse () {
+  return new Response('', { status: 503, statusText: 'Service Unavailable' });
+}
+    
+    var request = event.request;
+    if (request.method !== 'GET') {
+        return;
+    }
     if (requestURL.origin == location.origin) {
       if (requestURL.pathname == "/data") {
         return;
       }
     }
-    event.respondWith(async function() {
+    /*event.respondWith(async function() {
       const cachedResponse = await caches.match(event.request);
       return cachedResponse || fetch(event.request);
-    }());
+    }());*/
+      event.respondWith(caches
+      .match(request) 
+      .then(queriedCache)
+    );
 });
+

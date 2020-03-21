@@ -1,5 +1,4 @@
 "use strict";
-var version = "v1::00002::";
 function isOnline() {
   var connectionStatus = document.getElementById("nonet");
 
@@ -53,7 +52,7 @@ async function update() {
   try {
     const networkResponse = await networkPromise;
     if ("caches" in window) {
-      const cache = await caches.open(version + "sarscov2-data");
+      const cache = await caches.open("sarscov2-data");
       cache.put("/data", networkResponse.clone());
     }
     await displayUpdate(networkResponse);
