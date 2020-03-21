@@ -1,22 +1,4 @@
 "use strict";
-// ServiceWorker is a progressive technology. Ignore unsupported browsers
-if ('serviceWorker' in navigator) {
-  console.log('CLIENT: service worker registration in progress.');
-  navigator.serviceWorker.register('/sw.js').then(function() {
-    console.log('CLIENT: service worker registration complete.');
-  }, function() {
-    console.log('CLIENT: service worker registration failure.');
-  });
-  navigator.serviceWorker.onmessage = function (evt) {
-    if(evt.data.fn){
-      if(evt.data.fn == "data-update"){
-        console.log(evt.data.data);
-      }
-  }
-  }
-} else {
-  console.log('CLIENT: service worker is not supported.');
-}
 function isOnline () {
   var connectionStatus = document.getElementById('nonet');
 
@@ -44,6 +26,21 @@ var out = {
   flag : document.getElementById('flag'),
   order : document.getElementById('order')
 };
+// ServiceWorker is a progressive technology. Ignore unsupported browsers
+if ('serviceWorker' in navigator) {
+  console.log('CLIENT: service worker registration in progress.');
+  navigator.serviceWorker.register('/sw.js');
+  navigator.serviceWorker.onmessage = function (evt) {
+    if(evt.data.fn){
+      if(evt.data.fn == "data-update"){
+        Data = evt.data.data;
+        hashChange();
+      }
+  }
+  }
+} else {
+  console.log('CLIENT: service worker is not supported.');
+}
 function getData(next){
   fetch("/data")
   .then(

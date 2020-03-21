@@ -1,4 +1,4 @@
-var version = 'v1::0001::';
+var version = 'v1::00001::';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {
@@ -63,25 +63,25 @@ self.addEventListener('fetch', (event) => {
 });
 
 function fromCache(request) {
-    return caches.open(version).then(function (cache) {
-      return cache.match(request);
-    });
+  return caches.open(version).then(function (cache) {
+    return cache.match(request);
+  });
 }
 function update(request) {
-    return caches.open(version).then(function (cache) {
-      return fetch(request).then(function (response) {
-        return cache.put(request, response.clone()).then(function () {
-          return response;
-        });
+  return caches.open(version).then(function (cache) {
+    return fetch(request).then(function (response) {
+      return cache.put(request, response.clone()).then(function () {
+        return response;
       });
     });
+  });
 }
 function refresh(response) {
-    return response.json().then(function (data) {
-      return self.clients.matchAll().then(function (clients) {
-        clients.forEach(function (client) {
-          client.postMessage({fn:"data-update",data:response});
-        });
+  return response.json().then(function (d) {
+    return self.clients.matchAll().then(function (clients) {
+      clients.forEach(function (client) {
+        client.postMessage({fn:"data-update",data:d});
       });
     });
+  });
 }
