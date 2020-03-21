@@ -712,6 +712,10 @@ var countries = [
     code: "AE"
   },
   {
+    name: "Uganda",
+    code: "UG"
+  },
+  {
     name: "UK",
     code: "GB"
   },
