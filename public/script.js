@@ -1,4 +1,5 @@
 "use strict";
+var version = 'v1::00002::';
 function isOnline () {
   var connectionStatus = document.getElementById('nonet');
 
@@ -41,29 +42,67 @@ if ('serviceWorker' in navigator) {
 } else {
   console.log('CLIENT: service worker is not supported.');
 }
+if(caches){
+  async function update() {
+    // Start the network request as soon as possible.
+    const networkPromise = fetch('/data');
+  
+    //startSpinner();
+    if('caches' in window){
+      const cachedResponse = await caches.match('/data');
+      if (cachedResponse) await displayUpdate(cachedResponse);
+    }
+    try {
+      const networkResponse = await networkPromise;
+      if('caches' in window){
+        const cache = await caches.open(version + 'sarscov2-data');
+        cache.put('/data', networkResponse.clone());
+      }
+      await displayUpdate(networkResponse);
+    } catch (err) {
+      // Maybe report a lack of connectivity to the user.
+    }
+    //stopSpinner();
+    //const networkResponse = await networkPromise;
+  }
+  
+  async function displayUpdate(response) {
+    Data = await response.json();
+    hashChange();
+  }
+  function getData(next){
+    await update();
+    if(typeof(next) == "function"){
+      next();
+    }
+  }
+}
 function getData(next){
-  fetch("/data")
-  .then(
-      function(response) {
-      if (response.status !== 200) {
-          err();
-          return;
-      }
-      // Examine the text in the response
-      response.json().then(function(data) {
-          Data = data;
-          countries = data.map(({ country }) => country);
-          out.order.max = document.getElementById('all').innerText = data.length-1;
-          autocomplete(sel, countries);
-          if(typeof(next) == "function"){
-            next();
-          }
-      });
-      }
-  )
-  .catch(function(err) {
-      err();
-  });
+  if('caches' in window){
+
+  }else{
+    fetch("/data")
+    .then(
+        function(response) {
+        if (response.status !== 200) {
+            err();
+            return;
+        }
+        // Examine the text in the response
+        response.json().then(function(data) {
+            Data = data;
+            countries = data.map(({ country }) => country);
+            out.order.max = document.getElementById('all').innerText = data.length-1;
+            autocomplete(sel, countries);
+            if(typeof(next) == "function"){
+              next();
+            }
+        });
+        }
+    ).catch(function(err) {
+        err();
+    });
+  }
 }
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
