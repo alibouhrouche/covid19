@@ -40,19 +40,13 @@ self.addEventListener("activate", function(event) {
 
 self.addEventListener('fetch', (event) => {
     // Parse the URL:
-    //const requestURL = new URL(event.request.url);
+    const requestURL = new URL(event.request.url);
     // Routing for local URLs
-    /*if (requestURL.origin == location.origin) {
+    if (requestURL.origin == location.origin) {
       if (requestURL.pathname == "/data") {
-        event.respondWith(fromCache(event.request));
-        event.waitUntil(
-            update(event.request)
-            .then(refresh)
-            .catch(()=>{return Promise.resolve('Success')})
-        );
         return;
       }
-    }*/
+    }
   
     // A sensible default pattern
     event.respondWith(async function() {
