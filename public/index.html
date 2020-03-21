@@ -64,8 +64,8 @@
     <div id="nonet">
         <b>You are currently offline.</b>
     </div>
-    <h1>
       <form autocomplete="off">
+        <h1>
         <label for="country">Choose a Country: <div id="flag" class="fflag ff-xl ff-wave" title="none"></div></label>
       <div class="autocomplete">
         <input id="country" placeholder="Country">
@@ -73,17 +73,16 @@
       <datalist id="country-list">
         <option value="All">All</option>
       </datalist>
-      </form>
     </h1>
-    <label for="order" hidden>The Country Order</label>
-    <h2><input
+    <h2>
+      <label for="order" hidden>The Country Order</label><input
         type="number"
         name="order"
         id="order"
         min="0"
         inputmode="numeric"
         pattern="[0-9]*"
-      />/<span id="all">0</span></h2>
+      />/<span id="all">0</span></h2> </form>
     <div class="row">
       <div class="column">
         <div class="card" id="cases-div">
