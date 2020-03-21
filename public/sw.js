@@ -5,7 +5,6 @@ self.addEventListener("install", (event) => {
       const cache = await caches.open(version);
       await cache.addAll([
         '/',
-        '/data',
         '/style.css',
         '/script.js',
         '/icons.svg',
