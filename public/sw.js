@@ -1,4 +1,4 @@
-var version = 'v1::000003::';
+var version = 'v1::000004::';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {
@@ -10,6 +10,7 @@ self.addEventListener("install", (event) => {
         '/icons.svg',
         '/freakflags.css',
         '/favicon.ico',
+        '/manifest.json',
         'https://cdn.glitch.com/f2f5091a-5f0a-4796-94fa-c7393a3b1aae/flagSprite60.png?v=1584651917190'
       ]);
         return self.skipWaiting();
@@ -33,16 +34,8 @@ self.addEventListener("activate", function(event) {
     );
 });
 
-
 self.addEventListener('fetch', (event) => {
     const requestURL = new URL(event.request.url);
-    function unableToResolve () {
-  return offlineResponse();
-}
-function offlineResponse () {
-  return new Response('', { status: 503, statusText: 'Service Unavailable' });
-}
-    
     var request = event.request;
     if (request.method !== 'GET') {
         return;
@@ -52,13 +45,28 @@ function offlineResponse () {
         return;
       }
     }
-    /*event.respondWith(async function() {
-      const cachedResponse = await caches.match(event.request);
-      return cachedResponse || fetch(event.request);
-    }());*/
       event.respondWith(caches
       .match(request) 
       .then(queriedCache)
     );
+    function queriedCache (cached) {
+      var networked = fetch(request)
+        .then(fetchedFromNetwork, unableToResolve)
+        .catch(unableToResolve);
+      return cached || networked;
+    }
+    function fetchedFromNetwork (response) {
+        //var clonedResponse = response.clone();
+        //caches.open(version).then(function add (cache) {
+          //cache.put(request, clonedResponse);
+        //});
+        return response;
+    }
+    function unableToResolve () {
+      return offlineResponse();
+    }
+    function offlineResponse () {
+      return new Response('', { status: 503, statusText: 'Service Unavailable' });
+    }
 });
 
