@@ -29,12 +29,9 @@ var out = {
 };
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/sw.js")
-    .then(update)
-    .catch(update);
-} else {
-  update();
+    .register("/sw.js");
 }
+
 async function update() {
   const networkPromise =  navigator.onLine ? fetch("/data") : Promise.reject(new Error('fail'));
   if ("caches" in window) {
@@ -202,3 +199,4 @@ window.addEventListener("hashchange", function(e) {
   e.preventDefault();
   hashChange();
 });
+update();
