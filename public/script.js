@@ -58,9 +58,8 @@ async function update() {
     }
     await displayUpdate(networkResponse);
   } catch (er) {
-    err();
+    
   }
-  //const networkResponse = await networkPromise;
 }
 
 async function displayUpdate(response) {
