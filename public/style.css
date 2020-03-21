@@ -147,7 +147,7 @@ select {
   text-align: center;
 }
 
-input,
+.btn,input,
 select,
 button,
 textarea {
@@ -178,7 +178,7 @@ input[type="button"] {
   padding-left: 30px;
 }
 
-button:hover,
+.btn:hover,button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
   background: #324759;
@@ -280,5 +280,9 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 100%;
   padding: 5px;
   background-color: #415c73;
+  transition: transform 1s;
   transform: translateY(-100%);
+}
+.refreshing #refresh{
+  transform: translateY(0);
 }

@@ -26,24 +26,8 @@ var out = {
   critical: document.getElementById("critical"),
   flag: document.getElementById("flag"),
   order: document.getElementById("order"),
-  spinner: document.getElementById("Loading")
+  refreshbtn: document.getElementById("refreshbtn")
 };
-let _startY;
-
-document.body.addEventListener('touchstart', e => {
-  _startY = e.touches[0].pageY;
-}, {passive: true});
-
-document.body.addEventListener('touchmove', e => {
-  const y = e.touches[0].pageY;
-  // Activate custom pull-to-refresh effects when at the top of the container
-  // and user is scrolling up.
-  if (document.scrollingElement.scrollTop === 0 && y > _startY &&
-      !document.body.classList.contains('refreshing')) {
-    // refresh inbox.
-    
-  }
-}, {passive: true});
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/sw.js")
@@ -86,6 +70,31 @@ async function displayUpdate(response) {
   autocomplete(sel, countries);
   hashChange();
 }
+function refresh(){
+  update().then(function(){
+    document.body.className = '';
+  });
+}
+out.refreshbtn.addEventListener("click", function() {
+  document.body.className = 'refreshing';
+  refresh();
+});
+let _startY;
+document.body.addEventListener('touchstart', e => {
+  _startY = e.touches[0].pageY;
+}, {passive: true});
+
+document.body.addEventListener('touchmove', e => {
+  const y = e.touches[0].pageY;
+  // Activate custom pull-to-refresh effects when at the top of the container
+  // and user is scrolling up.
+
+  if (document.scrollingElement.scrollTop === 0 && y > _startY &&
+      !document.body.classList.contains('refreshing')) {
+      document.body.className = 'refreshing';
+      refresh();
+  }
+}, {passive: true});
 function autocomplete(inp, arr) {
   var currentFocus;
   inp.addEventListener("input", function(e) {
