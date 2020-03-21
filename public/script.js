@@ -28,7 +28,6 @@ var out = {
   order: document.getElementById("order"),
   spinner: document.getElementById("Loading")
 };
-// ServiceWorker is a progressive technology. Ignore unsupported browsers
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/sw.js")
@@ -173,7 +172,7 @@ function hashChange() {
     out.critical.innerText = data["critical"];
     out.flag.className =
       "fflag ff-xl ff-wave fflag-" + (data["code"] ? data["code"] : "none");
-    out.flag.title = data["code"] ? data["code"] : "none";
+    out.flag.title = data["country"] != "All" ? data["country"] : "The World";
     out.order.value = i;
     document.title =
       "Track Corona Virus Spread in " +
@@ -192,4 +191,3 @@ window.addEventListener("hashchange", function(e) {
   e.preventDefault();
   hashChange();
 });
-
