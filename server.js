@@ -3,7 +3,6 @@ var async  = require('express-async-await');
 var fetch = require('node-fetch');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 var compression = require('compression');
-var minify = require('express-minify');
 var countries = require('./list.js');
 var app = express();
 
@@ -31,18 +30,6 @@ function checkHttps(req, res, next) {
 
 app.all("*", checkHttps);
 app.use(compression({ filter: shouldCompress }))
-app.use(minify({
-  cache: false,
-  uglifyJsModule: null,
-  errorHandler: null,
-  jsMatch: /.js/,
-  cssMatch: /.css/,
-  jsonMatch: /json/,
-  sassMatch: /scss/,
-  lessMatch: /less/,
-  stylusMatch: /stylus/,
-  coffeeScriptMatch: /coffeescript/,
-}));
 app.use(express.static("public"));
 
 function shouldCompress (req, res) {
@@ -68,7 +55,7 @@ function shouldCompress (req, res) {
 });*/
 var middleware = createProxyMiddleware(options)
 app.use('/favicon.ico', middleware);
-("/flags", middleware);
+//("/flags", middleware);
 app.get("/data",async (request, response, next) => {
   function foundData(){
       return fetch("https://coronavirus-19-api.herokuapp.com/countries")
