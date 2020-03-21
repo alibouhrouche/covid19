@@ -17,6 +17,7 @@ body {
   background: #202b38;
   text-align: center;
   text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
 }
 
 button,
@@ -271,4 +272,13 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 5px;
   background-color: #B71C1C;
   display: none;
+}
+#refresh {
+  z-index: 10;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  padding: 5px;
+  background-color: #415c73;
+  transform: translateY(-100%);
 }

@@ -29,19 +29,19 @@ var out = {
   spinner: document.getElementById("Loading")
 };
 let _startY;
-const inbox = document.querySelector('#inbox');
 
-inbox.addEventListener('touchstart', e => {
+document.body.addEventListener('touchstart', e => {
   _startY = e.touches[0].pageY;
 }, {passive: true});
 
-inbox.addEventListener('touchmove', e => {
+document.body.addEventListener('touchmove', e => {
   const y = e.touches[0].pageY;
   // Activate custom pull-to-refresh effects when at the top of the container
   // and user is scrolling up.
   if (document.scrollingElement.scrollTop === 0 && y > _startY &&
       !document.body.classList.contains('refreshing')) {
     // refresh inbox.
+    
   }
 }, {passive: true});
 if ("serviceWorker" in navigator) {
