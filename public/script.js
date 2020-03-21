@@ -155,9 +155,6 @@ function autocomplete(inp, arr) {
     closeAllLists(e.target);
   });
 }
-out.flag.addEventListener("click", function() {
-  update();
-});
 function err() {
   sel.value = "?";
   out.cases.innerText = "?";

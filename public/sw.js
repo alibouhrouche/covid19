@@ -1,4 +1,4 @@
-var version = 'v1::000006::';
+var version = 'v1::0000000002::sarscov2';
 
 self.addEventListener("install", (event) => {
     event.waitUntil(async function() {
@@ -24,7 +24,7 @@ self.addEventListener("activate", function(event) {
           return Promise.all(
             keys
               .filter(function (key) {
-                return (!key.startsWith(version))&&(key != "sarscov2-data");
+                return (key != version)&&(key != "sarscov2-data");
               })
               .map(function (key) {
                 return caches.delete(key);
