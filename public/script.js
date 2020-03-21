@@ -42,42 +42,39 @@ if ('serviceWorker' in navigator) {
 } else {
   console.log('CLIENT: service worker is not supported.');
 }
-if(caches){
-  async function update() {
-    // Start the network request as soon as possible.
-    const networkPromise = fetch('/data');
-  
-    //startSpinner();
+async function update() {
+  // Start the network request as soon as possible.
+  const networkPromise = fetch('/data');
+
+  //startSpinner();
+  if('caches' in window){
+    const cachedResponse = await caches.match('/data');
+    if (cachedResponse) await displayUpdate(cachedResponse);
+  }
+  try {
+    const networkResponse = await networkPromise;
     if('caches' in window){
-      const cachedResponse = await caches.match('/data');
-      if (cachedResponse) await displayUpdate(cachedResponse);
+      const cache = await caches.open(version + 'sarscov2-data');
+      cache.put('/data', networkResponse.clone());
     }
-    try {
-      const networkResponse = await networkPromise;
-      if('caches' in window){
-        const cache = await caches.open(version + 'sarscov2-data');
-        cache.put('/data', networkResponse.clone());
-      }
-      await displayUpdate(networkResponse);
-    } catch (err) {
-      // Maybe report a lack of connectivity to the user.
-    }
-    //stopSpinner();
-    //const networkResponse = await networkPromise;
+    await displayUpdate(networkResponse);
+  } catch (er) {
+    // Maybe report a lack of connectivity to the user.
+    err();
   }
-  
-  async function displayUpdate(response) {
-    Data = await response.json();
-    hashChange();
-  }
-  function getData(next){
-    await update();
-    if(typeof(next) == "function"){
-      next();
-    }
-  }
+  //stopSpinner();
+  //const networkResponse = await networkPromise;
 }
-function getData(next){
+
+async function displayUpdate(response) {
+  Data = await response.json();
+  countries = Data.map(({ country }) => country);
+  out.order.max = document.getElementById('all').innerText = Data.length-1;
+  autocomplete(sel, countries);
+  hashChange();
+}
+
+/*function getData(next){
   if('caches' in window){
 
   }else{
@@ -103,7 +100,7 @@ function getData(next){
         err();
     });
   }
-}
+}*/
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -202,7 +199,7 @@ function autocomplete(inp, arr) {
   });
   }
 out.flag.addEventListener("click", function(){
-  getData(hashChange);
+  update();
 });
 function err(){
   sel.value = '?';
@@ -249,4 +246,4 @@ window.addEventListener('hashchange', function (e) {
     e.preventDefault();
     hashChange();
 });
-getData(hashChange);
+update();
