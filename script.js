@@ -63,7 +63,7 @@ async function update() {
                 ResData[0]['todayDeaths'] += e['todayDeaths'];
                 ResData[0]['recovered'] += e['recovered'];
                 ResData[0]['critical'] += e['critical'];
-                var cntry = countries.find(({ name }) => name === e.country);
+                var cntry = countries_2.find(({ name }) => name === e.country);
                 ResData.push({
                   "country": e['country'],
                   "code": (cntry && cntry.code) ? cntry.code : false,

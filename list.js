@@ -1,4 +1,4 @@
-var countries = [
+var countries_2 = [
   {
     name: "Afghanistan",
     code: "AF"
