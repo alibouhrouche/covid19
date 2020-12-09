@@ -756,4 +756,3 @@ var countries = [
     code: "ZW"
   }
 ];
-module.exports = countries;

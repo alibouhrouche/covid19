@@ -34,13 +34,64 @@ if ("serviceWorker" in navigator) {
 
 async function update() {
   if(navigator.onLine){
-    fetch("https://coronavirus-19-api.herokuapp.com/countries").then(function(){})
+    fetch("https://coronavirus-19-api.herokuapp.com/countries")
+        .then(
+        function(response) {
+          if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+            return;
+          }
+          response.json().then(function(data) {
+              var ResData = [
+                {
+                  "country": "All",
+                  "code": false,
+                  "cases": 0,
+                  "todayCases": 0,
+                  "deaths": 0,
+                  "todayDeaths": 0,
+                  "recovered": 0,
+                  "critical": 0
+                }
+              ];
+              for (let i = 0; i < data.length; i++) {
+                const e = data[i];
+                ResData[0]['cases'] += e['cases'];
+                ResData[0]['todayCases'] += e['todayCases'];
+                ResData[0]['deaths'] += e['deaths'];
+                ResData[0]['todayDeaths'] += e['todayDeaths'];
+                ResData[0]['recovered'] += e['recovered'];
+                ResData[0]['critical'] += e['critical'];
+                var cntry = countries.find(({ name }) => name === e.country);
+                ResData.push({
+                  "country": e['country'],
+                  "code": (cntry && cntry.code) ? cntry.code : false,
+                  "cases": e['cases'],
+                  "todayCases": e['todayCases'],
+                  "deaths": e['deaths'],
+                  "todayDeaths": e['todayDeaths'],
+                  "recovered": e['recovered'],
+                  "critical": e['critical']
+                });
+              }
+            Data = ResData;
+            countries = Data.map(({ country }) => country);
+            out.order.max = document.getElementById("all").innerText = Data.length - 1;
+            autocomplete(sel, countries);
+            hashChange();
+          });
+        }
+      )
+      .catch(function(err) {
+        console.log('Fetch Error :-S', err);
+      });
   }
-  const networkPromise =  navigator.onLine ? fetch("https://coronavirus-19-api.herokuapp.com/countries") : Promise.reject(new Error('fail'));
+  //const networkPromise =  navigator.onLine ? fetch("https://coronavirus-19-api.herokuapp.com/countries") : Promise.reject(new Error('fail'));
   /*if ("caches" in window) {
     const cachedResponse = await caches.match("/data");
     if (cachedResponse) await displayUpdate(cachedResponse);
-  }*/
+  }
   try {
     const networkResponse = await networkPromise;
     if ("caches" in window) {
@@ -50,7 +101,7 @@ async function update() {
     await displayUpdate(networkResponse);
   } catch (er) {
     
-  }
+  }*/
   /*const networkPromise =  navigator.onLine ? fetch("/data") : Promise.reject(new Error('fail'));
   if ("caches" in window) {
     const cachedResponse = await caches.match("/data");
