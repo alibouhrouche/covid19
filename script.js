@@ -33,7 +33,25 @@ if ("serviceWorker" in navigator) {
 }
 
 async function update() {
-  const networkPromise =  navigator.onLine ? fetch("/data") : Promise.reject(new Error('fail'));
+  if(navigator.onLine){
+    fetch("https://coronavirus-19-api.herokuapp.com/countries").then(function(){})
+  }
+  const networkPromise =  navigator.onLine ? fetch("https://coronavirus-19-api.herokuapp.com/countries") : Promise.reject(new Error('fail'));
+  /*if ("caches" in window) {
+    const cachedResponse = await caches.match("/data");
+    if (cachedResponse) await displayUpdate(cachedResponse);
+  }*/
+  try {
+    const networkResponse = await networkPromise;
+    if ("caches" in window) {
+      const cache = await caches.open("sarscov2-data");
+      cache.put("/data", networkResponse.clone());
+    }
+    await displayUpdate(networkResponse);
+  } catch (er) {
+    
+  }
+  /*const networkPromise =  navigator.onLine ? fetch("/data") : Promise.reject(new Error('fail'));
   if ("caches" in window) {
     const cachedResponse = await caches.match("/data");
     if (cachedResponse) await displayUpdate(cachedResponse);
@@ -47,7 +65,7 @@ async function update() {
     await displayUpdate(networkResponse);
   } catch (er) {
     
-  }
+  }*/
 }
 
 async function displayUpdate(response) {
